@@ -7,7 +7,7 @@ Extracted from the notebooks, reports, and code on disk. This is the evidence ba
 | CV claim | Evidence found | Site copy |
 | --- | --- | --- |
 | NASA: "99% accuracy" | Best logged run `f1_anomaly` **0.9787**; no accuracy logged. `shuttle_ocsvm_99f1.pkl` has no supporting code or run. | "F1 0.979 on the anomaly class" — never accuracy, never 99% |
-| H-GATE: ensemble superiority | +0.16 pp accuracy vs vanilla XGBoost; macro-AUC is *lower* (0.9984 vs 0.9993) | Lead with macro-F1 0.986 and macro-FPR 0.37%; compare honestly to a strong baseline |
+| H-GATE: ensemble superiority | +0.16 pp accuracy vs vanilla XGBoost (baseline macro-F1 0.9839); macro-AUC is *lower* (0.9984 vs 0.9993) | Lead with macro-F1 0.986 and macro-FPR 0.37%; compare honestly to a strong baseline |
 | Spell Caster: "Whisper-LoRA dual ASR+SER" | LoRA is fine-tuned for **emotion only**; transcription uses stock Whisper-Small | "LoRA-tuned emotion head on Whisper-Small; transcription uses the base model" |
 | Spell Caster: "latency under 2s" | Only measured figure: Conformer CPU batch-1 — 38.5 ms FP32, 19.3 ms INT8. Whisper path unmeasured. | Use the measured Conformer numbers; do not claim a Whisper latency |
 | AdaIN: "150 ms inference" | Report: 15–30 FPS at 256 px on 2×T4 | "15–30 FPS at 256 px (2×T4)" |

@@ -54,6 +54,10 @@ export const ACHIEVEMENTS: Achievement[] = [
   },
 ];
 
+export function sortedAchievements(): Achievement[] {
+  return [...ACHIEVEMENTS].sort((a, b) => b.sort - a.sort);
+}
+
 export function recentAchievements(limit: number): Achievement[] {
-  return [...ACHIEVEMENTS].sort((a, b) => b.sort - a.sort).slice(0, limit);
+  return sortedAchievements().slice(0, limit);
 }

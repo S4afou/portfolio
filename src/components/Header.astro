@@ -17,6 +17,11 @@ import Mark from './Mark.astro';
         NAV.map((item) => (
           <a
             href={item.href}
+            aria-current={
+              Astro.url.pathname === item.href || Astro.url.pathname.startsWith(`${item.href}/`)
+                ? 'page'
+                : undefined
+            }
             class="link-underline font-mono text-[11px] uppercase tracking-[0.16em] text-paper/85 hover:text-paper"
           >
             {item.label}

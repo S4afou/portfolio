@@ -64,7 +64,23 @@ async function spellCaster() {
   await webp(path.join(spell, 'whisperspellengine_architecture.png'), 'projects/spell-caster/architecture.webp', 1600);
   await webp(path.join(spell, 'ice_cast.png'), 'projects/spell-caster/ice-cast.webp', 1100);
   await webp(path.join(spell, 'whisper_confusion_matrix.png'), 'projects/spell-caster/confusion-matrix.webp', 900);
-  await webp(path.join(spell, 'latency_breakdown (1).png'), 'projects/spell-caster/latency.webp', 800);
+  // The source latency plot measures the unquantised CPU/GPU paths, not the INT8 result we publish.
+  await renderSvg(spellLatency(), 'projects/spell-caster/latency.webp', 1600);
+}
+
+function spellLatency() {
+  const scale = 24;
+  const bar = { value: 19.3, y: 360 };
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+    <rect width="1600" height="900" fill="#080809"/>
+    <text x="80" y="90" font-family="Consolas, monospace" font-size="24" letter-spacing="4" fill="#c8102e">INFERENCE LATENCY</text>
+    <text x="80" y="130" font-family="Consolas, monospace" font-size="18" letter-spacing="3" fill="#96968f">CONFORMER · CPU · BATCH SIZE 1 · ONNX INT8</text>
+    <text x="80" y="${bar.y - 20}" font-family="Consolas, monospace" font-size="24" fill="#96968f">INT8</text>
+    <rect x="80" y="${bar.y}" width="${bar.value * scale}" height="64" fill="#c8102e"/>
+    <text x="${80 + bar.value * scale + 24}" y="${bar.y + 44}" font-family="Consolas, monospace" font-size="34" fill="#f2f1ed">${bar.value} ms</text>
+    <text x="80" y="700" font-family="Arial, sans-serif" font-size="17" fill="#6f6f6a">Measured on CPU after ONNX export. The Whisper transcription path was not benchmarked.</text>
+  </svg>`;
 }
 
 async function hGate() {
@@ -104,8 +120,8 @@ async function hGate() {
 
 function hGateCover() {
   const base = [
-    { x: 70, label: 'FT-TRANSFORMER', sub: 'PyTorch · d_token 128' },
-    { x: 450, label: 'LIGHTGBM', sub: 'focal loss γ=2' },
+    { x: 70, label: 'FT-TRANSFORMER', sub: 'PyTorch' },
+    { x: 450, label: 'LIGHTGBM', sub: 'focal loss' },
     { x: 830, label: 'XGBOOST', sub: 'class-weighted' },
     { x: 1210, label: 'CATBOOST', sub: 'balanced' },
   ];
@@ -194,7 +210,7 @@ function nasaCover() {
     <text x="${cx}" y="${cy - 20}" text-anchor="middle" font-family="Consolas, monospace" font-size="26" fill="#96968f">PRODUCTION F1</text>
     <text x="${cx}" y="${cy + 40}" text-anchor="middle" font-family="Consolas, monospace" font-size="56" fill="#c8102e">0.979 -> 0.432</text>
     <text x="${cx}" y="${cy + 90}" text-anchor="middle" font-family="Consolas, monospace" font-size="22" fill="#96968f">DRIFT INJECTED · RETRAIN FIRED</text>
-    <text x="70" y="940" font-family="Consolas, monospace" font-size="20" fill="#96968f">55,941 TELEMETRY ROWS · 8 SENSOR CHANNELS · OPENML SHUTTLE</text>
+    <text x="70" y="940" font-family="Consolas, monospace" font-size="20" fill="#96968f">55,941 TELEMETRY ROWS · OPENML SHUTTLE</text>
   </svg>`;
 }
 
@@ -203,7 +219,6 @@ function nasaChart() {
   const rows = [
     { label: 'BASELINE', value: 0.979, y: 250, color: '#f2f1ed', note: 'registered artifact' },
     { label: 'PRODUCTION', value: 0.432, y: 430, color: '#c8102e', note: 'after injected drift' },
-    { label: 'PRODUCTION', value: 0.423, y: 560, color: '#c8102e', note: 'next batch' },
   ];
 
   const bars = rows
@@ -221,9 +236,9 @@ function nasaChart() {
     <text x="80" y="90" font-family="Consolas, monospace" font-size="24" letter-spacing="4" fill="#c8102e">MONITORING</text>
     <text x="80" y="130" font-family="Consolas, monospace" font-size="18" letter-spacing="3" fill="#96968f">F1 AGAINST THE REGISTERED BASELINE</text>
     ${bars}
-    <line x1="${80 + 0.8 * scale}" y1="190" x2="${80 + 0.8 * scale}" y2="660" stroke="#c8102e" stroke-width="2" stroke-dasharray="6 8"/>
+    <line x1="${80 + 0.8 * scale}" y1="190" x2="${80 + 0.8 * scale}" y2="620" stroke="#c8102e" stroke-width="2" stroke-dasharray="6 8"/>
     <text x="${80 + 0.8 * scale + 14}" y="210" font-family="Consolas, monospace" font-size="18" fill="#c8102e">RETRAIN &lt; 0.80</text>
-    <text x="80" y="820" font-family="Arial, sans-serif" font-size="17" fill="#6f6f6a">Values as logged in Weights &amp; Biases. Drift was injected deliberately to prove the retraining loop.</text>
+    <text x="80" y="820" font-family="Arial, sans-serif" font-size="17" fill="#6f6f6a">Baseline and production F1 as recorded in the project's logged runs. Drift was injected deliberately to prove the retraining loop.</text>
   </svg>`;
 }
 

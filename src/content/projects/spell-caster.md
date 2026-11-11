@@ -49,10 +49,10 @@ results:
 
 reflection: >-
   The Conformer was the more interesting model to build and the worse one to
-  ship: its WER was 0.113 against Whisper's 0.0015, and it only won on CPU
-  latency. I would start from the strongest base model and spend the effort on
-  the task-specific head, then measure latency on the path users actually take
-  rather than on a benchmark in isolation.
+  ship: its WER was 0.113 against Whisper's 0.0015, and its only advantage was
+  running comfortably on CPU. I would start from the strongest base model and
+  spend the effort on the task-specific head, then measure latency on the path
+  users actually take rather than on a benchmark in isolation.
 
 cover:
   src: /projects/spell-caster/cover.webp
@@ -70,8 +70,8 @@ gallery:
     alt: Confusion matrix for the six emotion classes predicted by the Whisper-Small emotion head.
     caption: Emotion confusion, six classes. Neutral is the easiest to confuse with everything else.
   - src: /projects/spell-caster/latency.webp
-    alt: Latency breakdown chart for the speech pipeline.
-    caption: The measured Conformer path on CPU, before and after INT8 export.
+    alt: Bar chart of Conformer inference latency on CPU at batch size one after INT8 export, 19.3 ms.
+    caption: Conformer on CPU at batch size one after INT8 export. The Whisper transcription path was not benchmarked.
 
 repos:
   - label: GitHub repository
