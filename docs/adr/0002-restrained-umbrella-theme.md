@@ -1,0 +1,3 @@
+# Restrained Umbrella theme with an original mark
+
+The visual identity borrows Resident Evil's Umbrella corporate aesthetic — black, white and a single red accent, clinical typography, a heraldic umbrella mark — instead of the game's fan-site furniture (glitch, CRT scanlines, ambient audio, the trademarked Umbrella logo). The audience is AI/DS recruiters, so the theme has to survive a 40-second professional skim; a full fan treatment risks reading as cosplay, and Capcom's logo would be used without permission. The theme is an accent on an otherwise credible technical site, not its organising idea.

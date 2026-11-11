@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE } from '../lib/site';
+---
+
+<BaseLayout>
+  <section class="shell pt-14 md:pt-20">
+    <div class="grid items-start gap-12 lg:grid-cols-[1.6fr_1fr]">
+      <div class="rise">
+        <p class="eyebrow">AI &amp; Data Science · {SITE.school}</p>
+        <h1 class="h-display mt-5">Medjahri<br />Mohammed<br />Safouane</h1>
+        <p class="mt-7 max-w-xl text-base leading-relaxed text-muted md:text-lg">
+          I build end-to-end machine-learning systems — the dataset, the model, and the pipeline that keeps
+          it honest once it is deployed.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a class="btn btn-solid" href={`mailto:${SITE.email}`}>Email me</a>
+          <a class="btn btn-ghost" href={SITE.cv} download>Download CV</a>
+        </div>
+        <dl class="mt-10 grid max-w-lg grid-cols-2 gap-6 border-t border-line pt-6">
+          <div>
+            <dt class="eyebrow">Based in</dt>
+            <dd class="mt-1 text-sm">{SITE.location}</dd>
+          </div>
+          <div>
+            <dt class="eyebrow">Status</dt>
+            <dd class="mt-1 flex items-start gap-2 text-sm">
+              <span class="mt-1.5 h-1.5 w-1.5 shrink-0 bg-blood" aria-hidden="true"></span>
+              <span>{SITE.availability}</span>
+            </dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="border border-line bg-panel/50 p-8 md:p-10">
+        <p class="eyebrow">Index</p>
+        <ul class="mt-5 space-y-4">
+          <li><a class="link-underline text-lg" href="/projects">Projects</a></li>
+          <li><a class="link-underline text-lg" href="/about">About</a></li>
+          <li><a class="link-underline text-lg" href={SITE.cv} download>Curriculum vitae</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
