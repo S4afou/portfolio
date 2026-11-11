@@ -4,13 +4,13 @@
 
 **Blocked by:** None (can start immediately)
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] One command starts a local dev server; one command produces static output
-- [ ] Palette is black, white/near-white and a single red accent; no light mode
-- [ ] Header and footer link to Projects, About and the CV
-- [ ] A 404 route exists and offers a way back
-- [ ] The full name appears on every page and the phone number appears nowhere
-- [ ] The umbrella cursor renders on desktop and is absent on touch devices
-- [ ] Layout holds at 360 px, 768 px and 1440 px
-- [ ] Reduced-motion preference removes transitions and animations
+- [x] One command starts a local dev server; one command produces static output
+- [x] Palette is black, white/near-white and a single red accent; no light mode
+- [x] Header and footer link to Projects, About and the CV
+- [x] A 404 route exists and offers a way back
+- [x] The full name appears on every page and the phone number appears nowhere
+- [x] The umbrella cursor renders on desktop and is absent on touch devices
+- [x] Layout holds at 360 px, 768 px and 1440 px
+- [x] Reduced-motion preference removes transitions and animations

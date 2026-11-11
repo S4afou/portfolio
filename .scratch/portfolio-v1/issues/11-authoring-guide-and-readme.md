@@ -4,12 +4,12 @@
 
 **Blocked by:** 10 — Content-to-page contract tests and build guardrails
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] The README covers install, dev, build and test with a single command each
-- [ ] The README explains the configurable site URL and that hosting is intentionally unset
-- [ ] The content guide shows how to add a Project using one Markdown file and an image folder
-- [ ] The content guide shows how to publish a Repository by adding its URL and changing its status
-- [ ] The content guide shows how to replace the CV and add an Achievement or certification
-- [ ] The guide names the claims ledger as the only source of numbers
-- [ ] Following only the guide, a new Project can be added without opening a layout file
+- [x] The README covers install, dev, build and test with a single command each
+- [x] The README explains the configurable site URL and that hosting is intentionally unset
+- [x] The content guide shows how to add a Project using one Markdown file and an image folder
+- [x] The content guide shows how to publish a Repository by adding its URL and changing its status
+- [x] The content guide shows how to replace the CV and add an Achievement or certification
+- [x] The guide names the claims ledger as the only source of numbers
+- [x] Following only the guide, a new Project can be added without opening a layout file

@@ -4,14 +4,14 @@
 
 **Blocked by:** 09 — Sharing, SEO and accessibility pass
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] Malformed frontmatter is rejected with a message naming the offending field
-- [ ] Every Project produces exactly one page at its slug
-- [ ] Pending and private Repositories produce no anchors; published ones do
-- [ ] Every referenced image resolves and has non-empty alt text
-- [ ] The phone number appears nowhere in the built output
-- [ ] Zmala, Dirassati, the MPI cluster and the Olympics dashboard appear nowhere
-- [ ] The full name appears on every page
-- [ ] A duplicate slug or a missing image fails the build
-- [ ] The full suite passes from a clean install
+- [x] Malformed frontmatter is rejected with a message naming the offending field
+- [x] Every Project produces exactly one page at its slug
+- [x] Pending and private Repositories produce no anchors; published ones do
+- [x] Every referenced image resolves and has non-empty alt text
+- [x] The phone number appears nowhere in the built output
+- [x] Zmala, Dirassati, the MPI cluster and the Olympics dashboard appear nowhere
+- [x] The full name appears on every page
+- [x] A duplicate slug or a missing image fails the build
+- [x] The full suite passes from a clean install

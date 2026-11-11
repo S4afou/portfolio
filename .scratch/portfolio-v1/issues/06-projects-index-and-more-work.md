@@ -4,12 +4,12 @@
 
 **Blocked by:** 05 — Shuttle Anomaly Detection Project page
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] The Projects index is reachable from the main navigation and lists all four Projects
-- [ ] Each card shows title, one-line summary, stack tags and its Publication Status
-- [ ] Each card opens the correct Project page
-- [ ] More work contains only AdaIN and Eigenfaces/Fisherfaces
-- [ ] Zmala, Dirassati, the MPI cluster and the Olympics dashboard appear nowhere
-- [ ] The index explains why some repositories show a publishing badge
-- [ ] The grid collapses to a single column on small screens
+- [x] The Projects index is reachable from the main navigation and lists all four Projects
+- [x] Each card shows title, one-line summary, stack tags and its Publication Status
+- [x] Each card opens the correct Project page
+- [x] More work contains only AdaIN and Eigenfaces/Fisherfaces
+- [x] Zmala, Dirassati, the MPI cluster and the Olympics dashboard appear nowhere
+- [x] The index explains why some repositories show a publishing badge
+- [x] The grid collapses to a single column on small screens

@@ -4,12 +4,12 @@
 
 **Blocked by:** 04 — H-GATE Project page
 
-**Status:** ready-for-agent
+**Status:** done
 
-- [ ] The Shuttle page is reachable at its own URL and uses the shared template
-- [ ] It presents one Project spanning the detector and the MLOps pipeline, with a working link to the published Repository
-- [ ] Results show anomaly F1 0.979, production F1 0.432 and the 0.80 retraining threshold
-- [ ] The page never claims 99% accuracy and does not cite the unsupported OCSVM filename
-- [ ] Copy states the drift was injected deliberately to prove the monitoring loop
-- [ ] The monitoring evidence image resolves and carries alt text
-- [ ] The published Repository link opens the real repository and is marked as published
+- [x] The Shuttle page is reachable at its own URL and uses the shared template
+- [x] It presents one Project spanning the detector and the MLOps pipeline, with a working link to the published Repository
+- [x] Results show anomaly F1 0.979, production F1 0.432 and the 0.80 retraining threshold
+- [x] The page never claims 99% accuracy and does not cite the unsupported OCSVM filename
+- [x] Copy states the drift was injected deliberately to prove the monitoring loop
+- [x] The monitoring evidence image resolves and carries alt text
+- [x] The published Repository link opens the real repository and is marked as published
