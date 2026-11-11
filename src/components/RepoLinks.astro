@@ -1,0 +1,46 @@
+---
+import type { Repo } from '../lib/project-schema';
+import { linkableRepos, repoStatusLabel, unpublishedRepos } from '../lib/repos';
+
+interface Props {
+  repos: Repo[];
+}
+
+const { repos } = Astro.props;
+const links = linkableRepos(repos);
+const unpublished = unpublishedRepos(repos);
+---
+
+{
+  links.length > 0 && (
+    <ul class="flex flex-col gap-2">
+      {links.map((repo) => (
+        <li>
+          <a
+            class="btn btn-ghost w-fit"
+            href={repo.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>{repo.label}</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+{
+  unpublished.length > 0 && (
+    <ul class="flex flex-col gap-2">
+      {unpublished.map((repo) => (
+        <li>
+          <span class="badge">
+            {repo.label} — {repoStatusLabel(repo)}
+          </span>
+        </li>
+      ))}
+    </ul>
+  )
+}

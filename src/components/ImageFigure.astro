@@ -1,0 +1,31 @@
+---
+import type { Image } from '../lib/project-schema';
+
+interface Props {
+  image: Image;
+  variant?: 'plain' | 'cover';
+  eager?: boolean;
+  class?: string;
+}
+
+const { image, variant = 'plain', eager = false, class: className = '' } = Astro.props;
+---
+
+<figure class={className}>
+  <div class:list={['border border-line bg-panel', variant === 'cover' && 'aspect-[16/9] overflow-hidden']}>
+    <img
+      src={image.src}
+      alt={image.alt}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+      class:list={[variant === 'cover' ? 'h-full w-full object-cover' : 'w-full']}
+    />
+  </div>
+  {
+    image.caption && (
+      <figcaption class="mt-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted">
+        {image.caption}
+      </figcaption>
+    )
+  }
+</figure>

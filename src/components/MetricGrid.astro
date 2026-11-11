@@ -1,0 +1,22 @@
+---
+import type { Metric } from '../lib/project-schema';
+
+interface Props {
+  metrics: Metric[];
+  class?: string;
+}
+
+const { metrics, class: className = '' } = Astro.props;
+---
+
+<ul class:list={['grid gap-px border border-line bg-line sm:grid-cols-3', className]}>
+  {
+    metrics.map((metric) => (
+      <li class="bg-void p-5">
+        <p class="mono text-3xl leading-none tracking-tight">{metric.value}</p>
+        <p class="mt-3 font-mono text-[11px] uppercase tracking-[0.14em]">{metric.name}</p>
+        <p class="mt-1 text-xs leading-relaxed text-muted">{metric.context}</p>
+      </li>
+    ))
+  }
+</ul>

@@ -1,0 +1,120 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ImageFigure from '../../components/ImageFigure.astro';
+import MetricGrid from '../../components/MetricGrid.astro';
+import RepoLinks from '../../components/RepoLinks.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import { SITE } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects', ({ data }) => !data.draft);
+
+  return projects.map((project) => ({
+    params: { slug: project.id },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { data } = project;
+const index = String(data.order).padStart(2, '0');
+const gallery = data.gallery;
+---
+
+<BaseLayout title={data.title} description={data.summary} image={data.cover.src}>
+  <article>
+    <header class="shell pt-8 md:pt-12">
+      <nav aria-label="Breadcrumb" class="eyebrow flex flex-wrap items-center gap-2">
+        <a class="hover:text-paper" href="/projects">Projects</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page" class="text-paper/70">{data.title}</span>
+      </nav>
+
+      <div class="mt-10 grid gap-8 lg:grid-cols-[1.5fr_1fr] lg:items-end">
+        <div class="rise">
+          <p class="eyebrow text-blood">Project {index}</p>
+          <h1 class="h-display mt-4">{data.title}</h1>
+        </div>
+        <p class="max-w-xl text-base leading-relaxed text-muted md:text-lg">{data.summary}</p>
+      </div>
+
+      <ImageFigure image={data.cover} variant="cover" eager class="mt-10" />
+    </header>
+
+    <div class="shell mt-14 grid gap-14 lg:grid-cols-[minmax(0,1fr)_19rem]">
+      <div class="flex flex-col gap-14">
+        <section aria-labelledby="problem">
+          <SectionHeading index="01" title="Problem" id="problem" />
+          <p class="mt-5 max-w-2xl text-base leading-relaxed text-muted">{data.problem}</p>
+        </section>
+
+        <section aria-labelledby="approach">
+          <SectionHeading index="02" title="Approach" id="approach" />
+          <ol class="mt-6 flex flex-col gap-5">
+            {
+              data.approach.map((step, position) => (
+                <li class="flex max-w-2xl gap-4">
+                  <span class="mono mt-1 shrink-0 text-xs text-blood">
+                    {String(position + 1).padStart(2, '0')}
+                  </span>
+                  <p class="text-base leading-relaxed text-muted">{step}</p>
+                </li>
+              ))
+            }
+          </ol>
+        </section>
+
+        <section aria-labelledby="results">
+          <SectionHeading index="03" title="Results" id="results" />
+          <MetricGrid metrics={data.results} class="mt-6" />
+          <div class="mt-10 flex flex-col gap-8">
+            {gallery.map((image) => <ImageFigure image={image} />)}
+          </div>
+        </section>
+
+        <section aria-labelledby="reflection">
+          <SectionHeading index="04" title="What I would do differently" id="reflection" />
+          <p class="mt-5 max-w-2xl text-base leading-relaxed text-muted">{data.reflection}</p>
+        </section>
+      </div>
+
+      <aside class="h-fit border border-line bg-panel/40 p-6 lg:sticky lg:top-24">
+        <p class="eyebrow">Ownership</p>
+        <p class="mt-2 text-sm leading-relaxed text-paper/90">{data.ownership}</p>
+
+        <div class="mt-6 rule pt-5">
+          <p class="eyebrow">Timeframe</p>
+          <p class="mt-2 text-sm">{data.timeframe}</p>
+        </div>
+
+        <div class="mt-6 rule pt-5">
+          <p class="eyebrow">Stack</p>
+          <ul class="mt-3 flex flex-wrap gap-1.5">
+            {data.stack.map((tool) => <li class="tag">{tool}</li>)}
+          </ul>
+        </div>
+
+        <div class="mt-6 rule pt-5">
+          <p class="eyebrow">Repository</p>
+          <div class="mt-3">
+            <RepoLinks repos={data.repos} />
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <nav aria-label="Project footer" class="shell mt-20 border-t border-line pt-6">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <a class="mono text-[11px] uppercase tracking-[0.16em] text-muted hover:text-paper" href="/projects">
+          ← All projects
+        </a>
+        <a class="btn btn-solid" href={`mailto:${SITE.email}`}>Ask about this project</a>
+      </div>
+    </nav>
+  </article>
+</BaseLayout>
