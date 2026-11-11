@@ -56,4 +56,12 @@ describe('Project schema', () => {
 
     expect(projectSchema.safeParse(withRelativeCover).success).toBe(false);
   });
+
+  it('names the missing field when frontmatter is incomplete', () => {
+    const { title: _title, ...withoutTitle } = completeProject;
+    const result = projectSchema.safeParse(withoutTitle);
+
+    expect(result.success).toBe(false);
+    expect(result.error?.issues.some((issue) => issue.path[0] === 'title')).toBe(true);
+  });
 });

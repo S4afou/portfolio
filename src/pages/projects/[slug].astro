@@ -5,10 +5,13 @@ import ImageFigure from '../../components/ImageFigure.astro';
 import MetricGrid from '../../components/MetricGrid.astro';
 import RepoLinks from '../../components/RepoLinks.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
+import { assertProjectAssets } from '../../lib/content-guards';
 import { SITE } from '../../lib/site';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects', ({ data }) => !data.draft);
+
+  assertProjectAssets(projects);
 
   return projects.map((project) => ({
     params: { slug: project.id },
@@ -37,7 +40,7 @@ const gallery = data.gallery;
 
       <div class="mt-10 grid gap-8 lg:grid-cols-[1.5fr_1fr] lg:items-end">
         <div class="rise">
-          <p class="eyebrow text-blood">Project {index}</p>
+          <p class="eyebrow text-ember">Project {index}</p>
           <h1 class="h-display mt-4">{data.title}</h1>
         </div>
         <p class="max-w-xl text-base leading-relaxed text-muted md:text-lg">{data.summary}</p>
@@ -59,7 +62,7 @@ const gallery = data.gallery;
             {
               data.approach.map((step, position) => (
                 <li class="flex max-w-2xl gap-4">
-                  <span class="mono mt-1 shrink-0 text-xs text-blood">
+                  <span class="mono mt-1 shrink-0 text-xs text-ember">
                     {String(position + 1).padStart(2, '0')}
                   </span>
                   <p class="text-base leading-relaxed text-muted">{step}</p>
