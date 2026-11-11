@@ -36,9 +36,20 @@ const pocket = 'E:/All/Studies/Procket_OMR/Report';
 const spell = 'E:/All/Studies/Final/Images';
 
 async function pocketOmr() {
-  // Cover: the first row of the segmentation figure (original -> canonical), cropped to 16:10.
-  await sharp(path.join(pocket, 'report_plots/03_segmentation_pipeline.png'))
-    .extract({ left: 0, top: 0, width: 1600, height: 900 })
+  // Cover: the original and rectified sheet panels, recomposed on the site's dark background.
+  const segmentation = path.join(pocket, 'report_plots/03_segmentation_pipeline.png');
+  const panel = { left: 0, top: 48, width: 798, height: 830 };
+  const original = await sharp(segmentation).extract(panel).resize({ height: 780 }).toBuffer();
+  const canonical = await sharp(segmentation)
+    .extract({ ...panel, left: 798 })
+    .resize({ height: 780 })
+    .toBuffer();
+
+  await sharp({ create: { width: 1600, height: 900, channels: 3, background: '#080809' } })
+    .composite([
+      { input: original, left: 35, top: 60 },
+      { input: canonical, left: 815, top: 60 },
+    ])
     .webp({ quality: 84 })
     .toFile(out('projects/pocket-omr/cover.webp'));
 

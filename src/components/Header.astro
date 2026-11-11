@@ -7,13 +7,12 @@ import Mark from './Mark.astro';
   <div class="shell flex h-16 items-center justify-between gap-4">
     <a href="/" class="flex min-w-0 items-center gap-3" aria-label={`${SITE.name} — home`}>
       <Mark size={26} class="shrink-0 text-paper" />
-      <span class="truncate font-mono text-[10px] uppercase tracking-[0.18em] text-paper/90 md:hidden">Medjahri</span>
       <span class="hidden truncate font-mono text-[11px] uppercase tracking-[0.18em] text-paper/90 md:inline">
         {SITE.name}
       </span>
     </a>
 
-    <nav aria-label="Primary" class="flex shrink-0 items-center gap-5">
+    <nav aria-label="Primary" class="flex shrink-0 items-center gap-3 md:gap-5">
       {
         NAV.map((item) => (
           <a
