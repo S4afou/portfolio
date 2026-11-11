@@ -1,0 +1,45 @@
+---
+import { SITE } from '../lib/site';
+---
+
+<section aria-labelledby="contact" class="shell mt-24">
+  <div class="grid gap-10 border border-line bg-panel/40 p-7 md:grid-cols-[1.4fr_1fr] md:p-12">
+    <div>
+      <p class="eyebrow">Contact</p>
+      <h2 id="contact" class="h-section mt-3">Let's talk about a PFE or research internship.</h2>
+      <p class="mt-4 max-w-lg text-sm leading-relaxed text-muted">
+        Email is the fastest way to reach me. I answer in English, French, or Arabic, and I am happy to
+        walk through any Project on this site.
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-3 md:pt-8">
+      <a class="btn btn-solid justify-between" href={`mailto:${SITE.email}`}>
+        <span>Email</span>
+        <span class="normal-case tracking-normal">{SITE.email}</span>
+      </a>
+      <a
+        class="btn btn-ghost justify-between"
+        href={SITE.linkedin}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span>LinkedIn</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+      <a
+        class="btn btn-ghost justify-between"
+        href={SITE.github}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span>GitHub</span>
+        <span aria-hidden="true">↗</span>
+      </a>
+      <a class="btn btn-ghost justify-between" href={SITE.cv} download>
+        <span>Download CV</span>
+        <span aria-hidden="true">↓</span>
+      </a>
+    </div>
+  </div>
+</section>

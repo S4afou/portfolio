@@ -1,23 +1,39 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactBlock from '../components/ContactBlock.astro';
+import MoreWork from '../components/MoreWork.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Timeline from '../components/Timeline.astro';
+import ToolkitStrip from '../components/ToolkitStrip.astro';
+import { recentAchievements } from '../lib/achievements';
 import { SITE } from '../lib/site';
+
+const featured = (await getCollection('projects', ({ data }) => !data.draft && data.featured)).sort(
+  (a, b) => a.data.order - b.data.order
+);
+const recent = recentAchievements(4);
 ---
 
 <BaseLayout>
   <section class="shell pt-14 md:pt-20">
-    <div class="grid items-start gap-12 lg:grid-cols-[1.6fr_1fr]">
+    <div class="grid items-start gap-12 lg:grid-cols-[1.55fr_1fr]">
       <div class="rise">
-        <p class="eyebrow">AI &amp; Data Science · {SITE.school}</p>
+        <p class="eyebrow">AI &amp; Data Science engineering student · {SITE.school}</p>
         <h1 class="h-display mt-5">Medjahri<br />Mohammed<br />Safouane</h1>
         <p class="mt-7 max-w-xl text-base leading-relaxed text-muted md:text-lg">
-          I build end-to-end machine-learning systems — the dataset, the model, and the pipeline that keeps
-          it honest once it is deployed.
+          I build end-to-end machine-learning systems — the dataset, the model, and the pipeline that
+          keeps it honest once it is deployed.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a class="btn btn-solid" href={`mailto:${SITE.email}`}>Email me</a>
           <a class="btn btn-ghost" href={SITE.cv} download>Download CV</a>
         </div>
-        <dl class="mt-10 grid max-w-lg grid-cols-2 gap-6 border-t border-line pt-6">
+      </div>
+
+      <aside class="border border-line bg-panel/50 p-7 md:p-9">
+        <p class="eyebrow">At a glance</p>
+        <dl class="mt-5 flex flex-col gap-5">
           <div>
             <dt class="eyebrow">Based in</dt>
             <dd class="mt-1 text-sm">{SITE.location}</dd>
@@ -29,17 +45,55 @@ import { SITE } from '../lib/site';
               <span>{SITE.availability}</span>
             </dd>
           </div>
+          <div>
+            <dt class="eyebrow">Focus</dt>
+            <dd class="mt-1 text-sm">Computer vision · Speech · MLOps</dd>
+          </div>
+          <div>
+            <dt class="eyebrow">Languages</dt>
+            <dd class="mt-1 text-sm">English · French · Arabic</dd>
+          </div>
         </dl>
-      </div>
-
-      <div class="border border-line bg-panel/50 p-8 md:p-10">
-        <p class="eyebrow">Index</p>
-        <ul class="mt-5 space-y-4">
-          <li><a class="link-underline text-lg" href="/projects">Projects</a></li>
-          <li><a class="link-underline text-lg" href="/about">About</a></li>
-          <li><a class="link-underline text-lg" href={SITE.cv} download>Curriculum vitae</a></li>
-        </ul>
-      </div>
+      </aside>
     </div>
   </section>
+
+  <section aria-labelledby="selected-projects" class="shell mt-20">
+    <div class="flex flex-wrap items-baseline justify-between gap-4 border-t border-line pt-5">
+      <div class="flex items-baseline gap-4">
+        <span class="mono text-xs tracking-[0.2em] text-ember">01</span>
+        <h2 id="selected-projects" class="h-section">Selected Projects</h2>
+      </div>
+      <a class="mono text-[11px] uppercase tracking-[0.16em] text-muted hover:text-paper" href="/projects">
+        All projects →
+      </a>
+    </div>
+
+    <div class="mt-8 grid gap-6 md:grid-cols-2">
+      {featured.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </section>
+
+  <MoreWork />
+  <ToolkitStrip />
+
+  <section aria-labelledby="track-record" class="shell mt-24">
+    <div class="flex flex-wrap items-baseline justify-between gap-4 border-t border-line pt-5">
+      <div class="flex items-baseline gap-4">
+        <span class="mono text-xs tracking-[0.2em] text-ember">02</span>
+        <h2 id="track-record" class="h-section">Track record</h2>
+      </div>
+      <a class="mono text-[11px] uppercase tracking-[0.16em] text-muted hover:text-paper" href="/about">
+        Full history →
+      </a>
+    </div>
+    <p class="mt-4 max-w-xl text-sm leading-relaxed text-muted">
+      An internship, a teaching role, two student-club offices, and the baccalaureate that started it.
+    </p>
+    <div class="mt-8">
+      <Timeline items={recent} />
+    </div>
+  </section>
+
+  <ContactBlock />
 </BaseLayout>
