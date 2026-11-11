@@ -15,3 +15,11 @@ export function repoStatusLabel(repo: Repo): string {
   if (repo.status === 'pending') return 'Publishing soon';
   return 'Repository';
 }
+
+/** A one-line Publication Status summary for cards and indexes. */
+export function publicationSummary(repos: Repo[]): string {
+  if (repos.some((repo) => repo.status === 'published' && repo.url)) return 'Repository published';
+  if (repos.some((repo) => repo.status === 'private')) return 'Code private';
+  if (repos.length === 0) return 'No repository';
+  return 'Publishing soon';
+}

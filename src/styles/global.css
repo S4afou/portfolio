@@ -10,6 +10,8 @@
   --color-paper: #f2f1ed;
   --color-muted: #96968f;
   --color-blood: #c8102e;
+  /* Lighter red reserved for small text, where #c8102e would fail WCAG AA. */
+  --color-ember: #e8455a;
 }
 
 html {

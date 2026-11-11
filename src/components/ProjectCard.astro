@@ -1,0 +1,46 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { publicationSummary } from '../lib/repos';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { data } = project;
+const index = String(data.order).padStart(2, '0');
+const visibleStack = data.stack.slice(0, 4);
+const extraStack = data.stack.length - visibleStack.length;
+---
+
+<a
+  href={`/projects/${project.id}`}
+  class="card group flex h-full flex-col focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blood"
+>
+  <div class="aspect-[16/10] overflow-hidden border-b border-line bg-panel">
+    <img
+      src={data.cover.src}
+      alt={data.cover.alt}
+      loading="lazy"
+      decoding="async"
+      class="h-full w-full object-cover opacity-90 transition duration-300 group-hover:scale-[1.015] group-hover:opacity-100"
+    />
+  </div>
+
+  <div class="flex flex-1 flex-col p-6">
+    <div class="flex flex-wrap items-center justify-between gap-2">
+      <span class="mono text-[10px] uppercase tracking-[0.2em] text-ember">Project {index}</span>
+      <span class="mono text-[10px] uppercase tracking-[0.14em] text-muted">
+        {publicationSummary(data.repos)}
+      </span>
+    </div>
+
+    <h2 class="h-sub mt-3">{data.title}</h2>
+    <p class="mt-2 text-sm leading-relaxed text-muted">{data.summary}</p>
+
+    <ul class="mt-auto flex flex-wrap gap-1.5 pt-6">
+      {visibleStack.map((tool) => <li class="tag">{tool}</li>)}
+      {extraStack > 0 && <li class="tag">+{extraStack}</li>}
+    </ul>
+  </div>
+</a>
