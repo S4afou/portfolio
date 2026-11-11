@@ -1,7 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import MoreWork from '../../components/MoreWork.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 
 const projects = (await getCollection('projects', ({ data }) => !data.draft)).sort(
@@ -11,24 +10,21 @@ const projects = (await getCollection('projects', ({ data }) => !data.draft)).so
 
 <BaseLayout
   title="Projects"
-  description="Four end-to-end machine-learning Projects: document vision, speech and emotion, malicious-URL detection, and anomaly detection with an MLOps loop."
+  description="Six end-to-end machine-learning Projects: document vision, speech and emotion, malicious-URL detection, anomaly detection with an MLOps loop, neural style transfer, and face recognition."
 >
   <section class="shell pt-14 md:pt-20">
-    <p class="eyebrow">Selected work</p>
-    <h1 class="h-display mt-5">Projects</h1>
+    <h1 class="h-display">Projects</h1>
     <p class="mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-      Four Projects, in the order I would walk you through them. Each one states the problem, what I
-      personally built, the measured result, and what I would do differently.
+      {projects.length} Projects, in the order I would walk you through them. Each one states the problem,
+      what I personally built, the measured result, and what I would do differently.
     </p>
-    <p class="mt-4 max-w-2xl border-l-2 border-line pl-4 text-sm leading-relaxed text-muted">
+    <p class="mt-4 max-w-2xl border-l-2 border-blood/60 pl-4 text-sm leading-relaxed text-muted">
       Some repositories are not public yet. Those pages show a <span class="text-paper">publishing soon</span>{' '}
-      badge instead of a link, so a missing Repository is never mistaken for a broken one.
+      note instead of a link, so a missing Repository is never mistaken for a broken one.
     </p>
 
-    <div class="mt-10 grid gap-6 md:grid-cols-2">
-      {projects.map((project) => <ProjectCard project={project} />)}
+    <div class="mt-10 grid gap-x-6 gap-y-12 md:grid-cols-2">
+      {projects.map((project) => <ProjectCard project={project} headingLevel={2} />)}
     </div>
   </section>
-
-  <MoreWork />
 </BaseLayout>

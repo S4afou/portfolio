@@ -1,21 +1,22 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import EntryList from '../components/EntryList.astro';
 import SectionHeading from '../components/SectionHeading.astro';
-import Timeline from '../components/Timeline.astro';
 import ToolkitStrip from '../components/ToolkitStrip.astro';
-import { sortedAchievements } from '../lib/achievements';
+import { CERTIFICATIONS, EDUCATION, EXPERIENCE, LEADERSHIP } from '../lib/background';
 import { SITE } from '../lib/site';
-
-const timeline = sortedAchievements();
 ---
 
 <BaseLayout
   title="About"
-  description="Medjahri Mohammed Safouane — AI & Data Science engineering student at ESI-SBA. Education, experience, skills, and the track record behind the Projects."
+  description="Medjahri Mohammed Safouane — AI & Data Science engineering student at ESI-SBA. Education, experience, leadership, skills, and languages."
 >
-  <section class="shell pt-14 md:pt-20">
-    <p class="eyebrow">Personnel file</p>
+  <section class="shell pt-14 md:pt-24">
+    <p class="label">Profile</p>
     <h1 class="h-display mt-5">About</h1>
+    <p class="serif mt-6 max-w-2xl text-[clamp(1.5rem,3vw,2.25rem)] leading-[1.15] text-paper">
+      I care about what happens after the demo.
+    </p>
 
     <div class="mt-10 grid items-start gap-12 lg:grid-cols-[1.5fr_1fr]">
       <div class="flex max-w-2xl flex-col gap-5 text-base leading-relaxed text-muted">
@@ -41,87 +42,49 @@ const timeline = sortedAchievements();
         </p>
       </div>
 
-      <aside class="h-fit border border-line bg-panel/40 p-6">
-        <p class="eyebrow">Open to</p>
+      <aside class="h-fit lg:border-l lg:border-line lg:pl-8">
+        <p class="label">Open to</p>
         <p class="mt-2 text-sm">{SITE.availability}.</p>
-        <p class="mt-5 eyebrow">Based in</p>
+        <p class="mt-5 label">Based in</p>
         <p class="mt-1 text-sm">{SITE.location}</p>
-        <div class="mt-6 flex flex-col gap-2">
-          <a class="btn btn-solid justify-center" href={SITE.cv} download>Download CV</a>
-          <a class="btn btn-ghost justify-center" href={`mailto:${SITE.email}`}>Email me</a>
+        <div class="mt-6 flex flex-col items-start gap-4">
+          <a class="btn btn-solid" href={SITE.cv} download>Download CV</a>
+          <a class="btn-text" href={`mailto:${SITE.email}`}>Email me <span aria-hidden="true">↗</span></a>
         </div>
       </aside>
     </div>
   </section>
 
   <section aria-labelledby="education" class="shell mt-20">
-    <SectionHeading index="01" title="Education" id="education" />
+    <SectionHeading title="Education" id="education" />
 
-    <dl class="mt-8 grid gap-px border border-line bg-line md:grid-cols-3">
-      <div class="bg-void p-6">
-        <dt class="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">2024 — Present</dt>
-        <dd class="mt-3">
-          <p class="text-base font-semibold">Higher Cycle (Engineering)</p>
-          <p class="mt-1 text-sm text-muted">ESI-SBA · Artificial Intelligence &amp; Data Science</p>
-        </dd>
-      </div>
-      <div class="bg-void p-6">
-        <dt class="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">2022 — 2024</dt>
-        <dd class="mt-3">
-          <p class="text-base font-semibold">Preparatory Cycle</p>
-          <p class="mt-1 text-sm text-muted">ESI-SBA · intensive mathematics and computer science</p>
-        </dd>
-      </div>
-      <div class="bg-void p-6">
-        <dt class="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">2022</dt>
-        <dd class="mt-3">
-          <p class="text-base font-semibold">Baccalaureate in Mathematics</p>
-          <p class="mt-1 text-sm text-muted">Highest Honors · 16.39 / 20</p>
-        </dd>
-      </div>
-    </dl>
+    <EntryList entries={EDUCATION} />
   </section>
 
   <section aria-labelledby="experience" class="shell mt-16">
-    <SectionHeading index="02" title="Experience" id="experience" />
+    <SectionHeading title="Experience" id="experience" />
 
-    <ol class="mt-8 flex flex-col">
-      <li class="grid gap-2 border-t border-line py-6 sm:grid-cols-[8.5rem_minmax(0,1fr)] sm:gap-6">
-        <span class="mono text-[11px] uppercase tracking-[0.12em] text-muted">Sep 2025</span>
-        <div>
-          <h3 class="text-base font-semibold">Network &amp; Security Engineering Intern</h3>
-          <p class="mt-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-ember">
-            Space Techniques Center (CTS), Arzew
-          </p>
-          <p class="mt-2 max-w-prose text-sm leading-relaxed text-muted">
-            Deployed VLANs, trunks, and SSH on Cisco routers to secure internal communications, and
-            integrated a FortiGate 400E firewall to filter traffic.
-          </p>
-        </div>
-      </li>
-      <li class="grid gap-2 border-t border-line py-6 sm:grid-cols-[8.5rem_minmax(0,1fr)] sm:gap-6">
-        <span class="mono text-[11px] uppercase tracking-[0.12em] text-muted">Aug — Nov 2024</span>
-        <div>
-          <h3 class="text-base font-semibold">English Instructor</h3>
-          <p class="mt-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-ember">Zenith Academy</p>
-          <p class="mt-2 max-w-prose text-sm leading-relaxed text-muted">
-            Taught English to groups of students while completing the engineering cycle.
-          </p>
-        </div>
-      </li>
-    </ol>
+    <EntryList entries={EXPERIENCE} />
   </section>
+
+  <section aria-labelledby="leadership" class="shell mt-16">
+    <SectionHeading
+      title="Leadership & extracurricular"
+      id="leadership"
+      note="Student-club offices, kept separate from professional Experience."
+    />
+
+    <EntryList entries={LEADERSHIP} />
+  </section>
+
+  {
+    CERTIFICATIONS.length > 0 && (
+      <section aria-labelledby="certifications" class="shell mt-16">
+        <SectionHeading title="Certifications & awards" id="certifications" />
+        <EntryList entries={CERTIFICATIONS} />
+      </section>
+    )
+  }
 
   <ToolkitStrip />
-
-  <section aria-labelledby="timeline" class="shell mt-24">
-    <SectionHeading index="03" title="Achievements" id="timeline" />
-    <p class="mt-4 max-w-xl text-sm leading-relaxed text-muted">
-      Internships, teaching, student leadership, and the baccalaureate. Certifications are appended
-      here as they are issued.
-    </p>
-    <div class="mt-8">
-      <Timeline items={timeline} />
-    </div>
-  </section>
 </BaseLayout>

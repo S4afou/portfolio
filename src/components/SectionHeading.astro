@@ -1,28 +1,25 @@
 ---
 interface Props {
-  index: string;
   title: string;
   id: string;
   actionHref?: string;
   actionLabel?: string;
+  note?: string;
 }
 
-const { index, title, id, actionHref, actionLabel } = Astro.props;
+const { title, id, actionHref, actionLabel, note } = Astro.props;
 ---
 
-<div class="flex flex-wrap items-baseline justify-between gap-4 border-t border-line pt-5">
-  <div class="flex items-baseline gap-4">
-    <span class="mono text-xs tracking-[0.2em] text-ember">{index}</span>
+<div class="border-t border-line pt-5">
+  <div class="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3">
     <h2 id={id} class="h-section">{title}</h2>
+    {
+      actionHref && actionLabel && (
+        <a class="text-sm font-medium text-muted transition hover:text-paper" href={actionHref}>
+          {actionLabel} <span aria-hidden="true">→</span>
+        </a>
+      )
+    }
   </div>
-  {
-    actionHref && actionLabel && (
-      <a
-        class="mono text-[11px] uppercase tracking-[0.16em] text-muted hover:text-paper"
-        href={actionHref}
-      >
-        {actionLabel} →
-      </a>
-    )
-  }
+  {note && <p class="mt-3 max-w-xl text-sm leading-relaxed text-muted">{note}</p>}
 </div>

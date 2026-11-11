@@ -56,8 +56,8 @@ reflection: >-
 
 cover:
   src: /projects/h-gate/cover.webp
-  alt: Diagram of the H-GATE stack, four base models feeding a logistic meta-learner and a five-class prediction.
-  caption: Four base models, one meta-learner, five output classes.
+  alt: Rear view of a server rack at the NERSC data center, with network and management cables connected to stacked machines.
+  caption: A data-center rack at NERSC. Photograph by Derrick Coetzee, CC0.
 
 gallery:
   - src: /projects/h-gate/confusion-matrix.webp

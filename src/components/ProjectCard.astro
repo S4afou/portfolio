@@ -4,43 +4,45 @@ import { publicationSummary } from '../lib/repos';
 
 interface Props {
   project: CollectionEntry<'projects'>;
+  headingLevel?: 2 | 3;
 }
 
-const { project } = Astro.props;
+const { project, headingLevel = 3 } = Astro.props;
 const { data } = project;
-const index = String(data.order).padStart(2, '0');
-const visibleStack = data.stack.slice(0, 4);
-const extraStack = data.stack.length - visibleStack.length;
+const shownStack = data.stack.slice(0, 4);
+const hiddenStackCount = data.stack.length - shownStack.length;
 ---
 
 <a
   href={`/projects/${project.id}`}
-  class="card group flex h-full flex-col focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blood"
+  class="group flex h-full flex-col focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blood"
 >
-  <div class="aspect-[16/10] overflow-hidden border-b border-line bg-panel">
+  <div class="aspect-[16/9] overflow-hidden bg-panel">
     <img
       src={data.cover.src}
       alt={data.cover.alt}
-      loading="eager"
+      loading="lazy"
       decoding="async"
-      class="h-full w-full object-cover opacity-90 transition duration-300 group-hover:scale-[1.015] group-hover:opacity-100"
+      class="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.02]"
     />
   </div>
 
-  <div class="flex flex-1 flex-col p-6">
-    <div class="flex flex-wrap items-center justify-between gap-2">
-      <span class="mono text-[10px] uppercase tracking-[0.2em] text-ember">Project {index}</span>
-      <span class="mono text-[10px] uppercase tracking-[0.14em] text-muted">
-        {publicationSummary(data.repos)}
-      </span>
-    </div>
+  <div class="flex items-start justify-between gap-4 pt-4">
+    {headingLevel === 2 ? <h2 class="h-sub">{data.title}</h2> : <h3 class="h-sub">{data.title}</h3>}
+    <span
+      class="mt-1 text-lg leading-none text-muted transition duration-200 group-hover:-translate-y-0.5 group-hover:text-blood"
+      aria-hidden="true">↗</span
+    >
+  </div>
 
-    <h2 class="h-sub mt-3">{data.title}</h2>
-    <p class="mt-2 text-sm leading-relaxed text-muted">{data.summary}</p>
+  <p class="mt-2 text-sm leading-relaxed text-muted">{data.summary}</p>
 
-    <ul class="mt-auto flex flex-wrap gap-1.5 pt-6">
-      {visibleStack.map((tool) => <li class="tag">{tool}</li>)}
-      {extraStack > 0 && <li class="tag">+{extraStack}</li>}
-    </ul>
+  <div class="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 pt-5 text-xs text-muted">
+    <span>{publicationSummary(data.repos)}</span>
+    <span aria-hidden="true" class="text-line">/</span>
+    <span>
+      {shownStack.join(' · ')}
+      {hiddenStackCount > 0 && ` +${hiddenStackCount}`}
+    </span>
   </div>
 </a>

@@ -56,8 +56,8 @@ reflection: >-
 
 cover:
   src: /projects/nasa/cover.webp
-  alt: Diagram of the Shuttle MLOps loop, from training and registration through serving, monitoring, and retraining.
-  caption: Train, register, serve, monitor, retrain — the loop that the drift experiment exercises.
+  alt: Space Shuttle Atlantis lifting off from Kennedy Space Center on the STS-132 mission.
+  caption: Atlantis on STS-132. The detector runs on shuttle telemetry, not on launch imagery. Photograph by NASA, public domain.
 
 gallery:
   - src: /projects/nasa/monitoring.webp

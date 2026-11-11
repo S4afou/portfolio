@@ -20,11 +20,11 @@ describe('Project asset guard', () => {
   it('rejects an image that is not on disk, naming the Project and the path', () => {
     expect(() =>
       assertProjectAssets([project({ cover: '/projects/pocket-omr/missing.webp' })])
-    ).toThrowError(/Pocket OMR[\s\S]*missing\.webp/);
+    ).toThrow(/Pocket OMR[\s\S]*missing\.webp/);
   });
 
   it('rejects a duplicate Project slug', () => {
-    expect(() => assertProjectAssets([project(), project({ title: 'Duplicate' })])).toThrowError(
+    expect(() => assertProjectAssets([project(), project({ title: 'Duplicate' })])).toThrow(
       /Duplicate Project slug/
     );
   });

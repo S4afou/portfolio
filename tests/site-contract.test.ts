@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import matter from 'gray-matter';
 import { describe, expect, it } from 'vitest';
+import { CERTIFICATIONS } from '../src/lib/background';
 import { projectSchema } from '../src/lib/project-schema';
 
 const root = process.cwd();
@@ -51,7 +52,14 @@ function images(html: string) {
 }
 
 function textContent(html: string) {
-  return html.replace(/<script[\s\S]*?<\/script>/g, ' ').replace(/<[^>]*>/g, ' ');
+  return html
+    .replace(/<script[\s\S]*?<\/script>/g, ' ')
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
 }
 
 describe('content-to-page contract', () => {
@@ -146,13 +154,69 @@ describe('content-to-page contract', () => {
     }
   });
 
-  it('links all four launch Projects from the home page', () => {
+  it('features four Projects on the home page and links the full index', () => {
     const home = pages.find((page) => page.route === '')?.html ?? '';
+    const featured = projects.filter((project) => project.data.featured);
+    const archive = pages.find((page) => page.route === 'projects')?.html ?? '';
 
-    expect(projects).toHaveLength(4);
-    for (const project of projects) {
+    expect(projects).toHaveLength(6);
+    expect(featured).toHaveLength(4);
+
+    for (const project of featured) {
       expect(anchors(home).some((anchor) => anchor.href === `/projects/${project.slug}`)).toBe(true);
     }
+
+    for (const project of projects.filter((entry) => !entry.data.featured)) {
+      expect(anchors(home).some((anchor) => anchor.href === `/projects/${project.slug}`)).toBe(false);
+    }
+
+    expect(anchors(home).some((anchor) => anchor.href === '/projects' && anchor.text.includes('Show all 6 projects'))).toBe(
+      true
+    );
+
+    for (const project of projects) {
+      expect(anchors(archive).some((anchor) => anchor.href === `/projects/${project.slug}`)).toBe(true);
+    }
+  });
+
+  it('publishes AdaIN and face recognition as full Projects', () => {
+    const adain = pages.find((page) => page.route === 'projects/adain-style-transfer')?.html ?? '';
+    const faces = pages.find((page) => page.route === 'projects/eigenfaces-fisherfaces')?.html ?? '';
+
+    expect(textContent(adain)).toContain('AdaIN Style Transfer');
+    expect(textContent(adain)).toContain('150 ms');
+    expect(textContent(faces)).toContain('Eigenfaces & Fisherfaces');
+    expect(textContent(faces)).toContain('54×');
+    expect(textContent(faces)).toContain('97.25%');
+  });
+
+  it('separates Leadership from Certifications and keeps skills and languages visible', () => {
+    const home = pages.find((page) => page.route === '')?.html ?? '';
+    const about = pages.find((page) => page.route === 'about')?.html ?? '';
+
+    const aboutText = textContent(about);
+    const homeText = textContent(home);
+
+    expect(aboutText).toContain('Leadership & extracurricular');
+    expect(aboutText).toContain('HR Manager');
+    expect(aboutText).toContain('Finance Manager');
+    expect(aboutText).toContain('Skills & languages');
+    expect(aboutText).toContain('Languages');
+    expect(aboutText).not.toContain('Achievements');
+
+    if (CERTIFICATIONS.length === 0) {
+      expect(aboutText).not.toContain('Certifications & awards');
+    } else {
+      expect(aboutText).toContain('Certifications & awards');
+    }
+
+    expect(anchors(home).some((anchor) => anchor.href === '/' && anchor.text === 'Home')).toBe(true);
+    expect(homeText).toContain('Experience');
+    expect(homeText).toContain('Skills & languages');
+    expect(homeText).toContain('Languages');
+    expect(homeText).not.toContain('Selected Projects');
+    expect(homeText).not.toContain('More work');
+    expect(homeText).not.toContain('Track record');
   });
 
   it('gives every route a unique title and description', () => {

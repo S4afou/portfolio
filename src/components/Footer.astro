@@ -1,16 +1,16 @@
 ---
-import { SITE } from '../lib/site';
+import { NAV, SITE } from '../lib/site';
 import Mark from './Mark.astro';
 
 const year = new Date().getFullYear();
 ---
 
 <footer class="mt-24 border-t border-line">
-  <div class="shell grid gap-10 py-12 md:grid-cols-[1.2fr_1fr_1fr]">
+  <div class="shell grid gap-10 py-12 md:grid-cols-[1.3fr_1fr_1fr]">
     <div>
       <div class="flex items-center gap-3">
-        <Mark size={28} class="text-paper" />
-        <p class="font-mono text-[11px] uppercase tracking-[0.16em]">{SITE.name}</p>
+        <Mark size={26} class="text-paper" />
+        <p class="text-[0.82rem] font-medium tracking-[-0.01em]">{SITE.name}</p>
       </div>
       <p class="mt-3 max-w-xs text-sm leading-relaxed text-muted">
         {SITE.role} · {SITE.school}. {SITE.availability}.
@@ -18,15 +18,19 @@ const year = new Date().getFullYear();
     </div>
 
     <nav aria-label="Footer" class="flex flex-col gap-2">
-      <p class="eyebrow mb-1">Index</p>
-      <a class="w-fit text-sm text-muted hover:text-paper" href="/">Home</a>
-      <a class="w-fit text-sm text-muted hover:text-paper" href="/projects">Projects</a>
-      <a class="w-fit text-sm text-muted hover:text-paper" href="/about">About</a>
+      <p class="label mb-1">Index</p>
+      {
+        NAV.map((item) => (
+          <a class="w-fit text-sm text-muted hover:text-paper" href={item.href}>
+            {item.label}
+          </a>
+        ))
+      }
       <a class="w-fit text-sm text-muted hover:text-paper" href={SITE.cv} download>Download CV</a>
     </nav>
 
     <div class="flex flex-col gap-2">
-      <p class="eyebrow mb-1">Contact</p>
+      <p class="label mb-1">Contact</p>
       <a class="w-fit break-all text-sm text-muted hover:text-paper" href={`mailto:${SITE.email}`}>{SITE.email}</a>
       <a
         class="w-fit text-sm text-muted hover:text-paper"
@@ -37,9 +41,7 @@ const year = new Date().getFullYear();
       <a class="w-fit text-sm text-muted hover:text-paper" href={SITE.github} target="_blank" rel="noopener noreferrer">
         GitHub
       </a>
-      <p class="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-muted">
-        © {year} · {SITE.location}
-      </p>
+      <p class="mt-3 text-xs text-muted">© {year} · {SITE.location}</p>
     </div>
   </div>
 </footer>

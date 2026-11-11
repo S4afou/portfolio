@@ -1,0 +1,30 @@
+---
+interface Entry {
+  period: string;
+  title: string;
+  org?: string;
+  issuer?: string;
+  detail?: string;
+}
+
+interface Props {
+  entries: Entry[];
+}
+
+const { entries } = Astro.props;
+---
+
+<ol class="mt-8">
+  {
+    entries.map((entry) => (
+      <li class="grid gap-2 border-t border-line py-6 sm:grid-cols-[8.5rem_minmax(0,1fr)] sm:gap-6">
+        <span class="label">{entry.period}</span>
+        <div>
+          <h3 class="text-base font-semibold leading-snug">{entry.title}</h3>
+          <p class="mt-1 text-sm text-ember">{entry.org ?? entry.issuer}</p>
+          {entry.detail && <p class="mt-2 max-w-prose text-sm leading-relaxed text-muted">{entry.detail}</p>}
+        </div>
+      </li>
+    ))
+  }
+</ol>

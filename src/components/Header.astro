@@ -3,16 +3,16 @@ import { NAV, SITE } from '../lib/site';
 import Mark from './Mark.astro';
 ---
 
-<header class="sticky top-0 z-50 border-b border-line bg-void/85 backdrop-blur-md">
+<header class="sticky top-0 z-50 border-b border-line bg-void/90 backdrop-blur-md">
   <div class="shell flex h-16 items-center justify-between gap-4">
     <a href="/" class="flex min-w-0 items-center gap-3" aria-label={`${SITE.name} — home`}>
-      <Mark size={26} class="shrink-0 text-paper" />
-      <span class="hidden truncate font-mono text-[11px] uppercase tracking-[0.18em] text-paper/90 md:inline">
+      <Mark size={24} class="shrink-0 text-paper" />
+      <span class="hidden truncate text-[0.82rem] font-medium tracking-[-0.01em] text-paper/90 lg:inline">
         {SITE.name}
       </span>
     </a>
 
-    <nav aria-label="Primary" class="flex shrink-0 items-center gap-3 md:gap-5">
+    <nav aria-label="Primary" class="flex shrink-0 items-center gap-3 sm:gap-5">
       {
         NAV.map((item) => (
           <a
@@ -22,13 +22,13 @@ import Mark from './Mark.astro';
                 ? 'page'
                 : undefined
             }
-            class="link-underline font-mono text-[11px] uppercase tracking-[0.16em] text-paper/85 hover:text-paper"
+            class="nav-link"
           >
             {item.label}
           </a>
         ))
       }
-      <a href={SITE.cv} download class="btn btn-solid !px-3 !py-2 text-[10px]">CV</a>
+      <a href={SITE.cv} download class="btn btn-solid !px-2.5 !py-1.5 text-[0.72rem]">CV</a>
     </nav>
   </div>
 </header>

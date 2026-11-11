@@ -2,44 +2,66 @@
 import { SITE } from '../lib/site';
 ---
 
-<section aria-labelledby="contact" class="shell mt-24">
-  <div class="grid gap-10 border border-line bg-panel/40 p-7 md:grid-cols-[1.4fr_1fr] md:p-12">
+<section aria-labelledby="contact" class="shell mt-24 border-t border-line pt-10">
+  <div class="grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:gap-16">
     <div>
-      <p class="eyebrow">Contact</p>
-      <h2 id="contact" class="h-section mt-3">Let's talk about a PFE or research internship.</h2>
-      <p class="mt-4 max-w-lg text-sm leading-relaxed text-muted">
+      <p class="label">Contact</p>
+      <h2 id="contact" class="h-section mt-4 max-w-2xl">
+        Let's talk about a PFE or <span class="serif">research internship.</span>
+      </h2>
+      <p class="mt-5 max-w-lg text-sm leading-relaxed text-muted">
         Email is the fastest way to reach me. I answer in English, French, or Arabic, and I am happy to
         walk through any Project on this site.
       </p>
     </div>
 
-    <div class="flex flex-col gap-3 md:pt-8">
-      <a class="btn btn-solid justify-between" href={`mailto:${SITE.email}`}>
-        <span>Email</span>
-        <span class="normal-case tracking-normal">{SITE.email}</span>
-      </a>
-      <a
-        class="btn btn-ghost justify-between"
-        href={SITE.linkedin}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span>LinkedIn</span>
-        <span aria-hidden="true">↗</span>
-      </a>
-      <a
-        class="btn btn-ghost justify-between"
-        href={SITE.github}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <span>GitHub</span>
-        <span aria-hidden="true">↗</span>
-      </a>
-      <a class="btn btn-ghost justify-between" href={SITE.cv} download>
-        <span>Download CV</span>
-        <span aria-hidden="true">↓</span>
-      </a>
-    </div>
+    <ul class="divide-y divide-line">
+      <li>
+        <a class="group flex items-center justify-between gap-5 py-4" href={`mailto:${SITE.email}`}>
+          <span class="text-sm text-muted">Email</span>
+          <span class="flex items-center gap-3 text-sm font-medium">
+            <span class="break-all">{SITE.email}</span>
+            <span class="text-muted transition group-hover:text-blood" aria-hidden="true">↗</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="group flex items-center justify-between gap-5 py-4"
+          href={SITE.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="text-sm text-muted">LinkedIn</span>
+          <span class="flex items-center gap-3 text-sm font-medium">
+            <span class="break-all text-right">{SITE.linkedinHandle}</span>
+            <span class="text-muted transition group-hover:text-blood" aria-hidden="true">↗</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="group flex items-center justify-between gap-5 py-4"
+          href={SITE.github}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="text-sm text-muted">GitHub</span>
+          <span class="flex items-center gap-3 text-sm font-medium">
+            <span>{SITE.githubHandle}</span>
+            <span class="text-muted transition group-hover:text-blood" aria-hidden="true">↗</span>
+          </span>
+        </a>
+      </li>
+      <li>
+        <a class="group flex items-center justify-between gap-5 py-4" href={SITE.cv} download>
+          <span class="text-sm text-muted">CV</span>
+          <span class="flex items-center gap-3 text-sm font-medium">
+            <span>Download PDF</span>
+            <span class="text-muted transition group-hover:text-blood" aria-hidden="true">↓</span>
+          </span>
+        </a>
+      </li>
+    </ul>
   </div>
 </section>
