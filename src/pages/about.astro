@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Timeline from '../components/Timeline.astro';
+import ToolkitStrip from '../components/ToolkitStrip.astro';
+import { ACHIEVEMENTS } from '../lib/achievements';
+import { SITE } from '../lib/site';
+
+const timeline = [...ACHIEVEMENTS].sort((a, b) => b.sort - a.sort);
+---
+
+<BaseLayout
+  title="About"
+  description="Medjahri Mohammed Safouane — AI & Data Science engineering student at ESI-SBA. Education, experience, skills, and the track record behind the Projects."
+>
+  <section class="shell pt-14 md:pt-20">
+    <p class="eyebrow">Personnel file</p>
+    <h1 class="h-display mt-5">About</h1>
+
+    <div class="mt-10 grid items-start gap-12 lg:grid-cols-[1.5fr_1fr]">
+      <div class="flex max-w-2xl flex-col gap-5 text-base leading-relaxed text-muted">
+        <p>
+          I am an AI &amp; Data Science engineering student at ESI-SBA in Sidi Bel Abbès. I came in
+          through the mathematics preparatory cycle, and most of what I enjoy sits where a model meets
+          a messy reality: a phone photograph instead of a flatbed scanner, a speech model on a laptop
+          CPU, a detector that notices its own drift.
+        </p>
+        <p>
+          My Projects tend to start with data collection and end with something that can be run. I
+          care about evaluation more than demo screenshots, which is why every Project here names the
+          metric, the setting it was measured in, and what I would do differently. Some of that means
+          reporting worse numbers than a CV bullet would: the figures on this site are the measured
+          ones.
+        </p>
+        <p>
+          I am looking for a PFE or research internship where I can own an applied machine-learning
+          problem end to end — particularly computer vision, speech, and the monitoring work that
+          keeps a deployed model honest. I work in Python, mostly with PyTorch and scikit-learn, and I
+          am comfortable with the parts nobody puts in a demo: labels, pipelines, and the number
+          everyone would rather not report.
+        </p>
+      </div>
+
+      <aside class="h-fit border border-line bg-panel/40 p-6">
+        <p class="eyebrow">Open to</p>
+        <p class="mt-2 text-sm">{SITE.availability}.</p>
+        <p class="mt-5 eyebrow">Based in</p>
+        <p class="mt-1 text-sm">{SITE.location}</p>
+        <div class="mt-6 flex flex-col gap-2">
+          <a class="btn btn-solid justify-center" href={SITE.cv} download>Download CV</a>
+          <a class="btn btn-ghost justify-center" href={`mailto:${SITE.email}`}>Email me</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section aria-labelledby="education" class="shell mt-20">
+    <div class="flex items-baseline gap-4 border-t border-line pt-5">
+      <span class="mono text-xs tracking-[0.2em] text-ember">01</span>
+      <h2 id="education" class="h-section">Education</h2>
+    </div>
+
+    <dl class="mt-8 grid gap-px border border-line bg-line md:grid-cols-3">
+      <div class="bg-void p-6">
+        <dt class="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">2024 — Present</dt>
+        <dd class="mt-3">
+          <p class="text-base font-semibold">Higher Cycle (Engineering)</p>
+          <p class="mt-1 text-sm text-muted">ESI-SBA · Artificial Intelligence &amp; Data Science</p>
+        </dd>
+      </div>
+      <div class="bg-void p-6">
+        <dt class="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">2022 — 2024</dt>
+        <dd class="mt-3">
+          <p class="text-base font-semibold">Preparatory Cycle</p>
+          <p class="mt-1 text-sm text-muted">ESI-SBA · intensive mathematics and computer science</p>
+        </dd>
+      </div>
+      <div class="bg-void p-6">
+        <dt class="font-mono text-[10px] uppercase tracking-[0.14em] text-muted">2022</dt>
+        <dd class="mt-3">
+          <p class="text-base font-semibold">Baccalaureate in Mathematics</p>
+          <p class="mt-1 text-sm text-muted">Highest Honors · 16.39 / 20</p>
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <section aria-labelledby="experience" class="shell mt-16">
+    <div class="flex items-baseline gap-4 border-t border-line pt-5">
+      <span class="mono text-xs tracking-[0.2em] text-ember">02</span>
+      <h2 id="experience" class="h-section">Experience</h2>
+    </div>
+
+    <ol class="mt-8 flex flex-col">
+      <li class="grid gap-2 border-t border-line py-6 sm:grid-cols-[8.5rem_minmax(0,1fr)] sm:gap-6">
+        <span class="mono text-[11px] uppercase tracking-[0.12em] text-muted">Sep 2025</span>
+        <div>
+          <h3 class="text-base font-semibold">Network &amp; Security Engineering Intern</h3>
+          <p class="mt-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-ember">
+            Space Techniques Center (CTS), Arzew
+          </p>
+          <p class="mt-2 max-w-prose text-sm leading-relaxed text-muted">
+            Deployed VLANs, trunks, and SSH on Cisco routers to secure internal communications, and
+            integrated a FortiGate 400E firewall to filter traffic.
+          </p>
+        </div>
+      </li>
+      <li class="grid gap-2 border-t border-line py-6 sm:grid-cols-[8.5rem_minmax(0,1fr)] sm:gap-6">
+        <span class="mono text-[11px] uppercase tracking-[0.12em] text-muted">Aug — Nov 2024</span>
+        <div>
+          <h3 class="text-base font-semibold">English Instructor</h3>
+          <p class="mt-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-ember">Zenith Academy</p>
+          <p class="mt-2 max-w-prose text-sm leading-relaxed text-muted">
+            Taught English to groups of students while completing the engineering cycle.
+          </p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <ToolkitStrip />
+
+  <section aria-labelledby="timeline" class="shell mt-24">
+    <div class="flex items-baseline gap-4 border-t border-line pt-5">
+      <span class="mono text-xs tracking-[0.2em] text-ember">03</span>
+      <h2 id="timeline" class="h-section">Achievements</h2>
+    </div>
+    <p class="mt-4 max-w-xl text-sm leading-relaxed text-muted">
+      Internships, teaching, student leadership, and the baccalaureate. Certifications are appended
+      here as they are issued.
+    </p>
+    <div class="mt-8">
+      <Timeline items={timeline} />
+    </div>
+  </section>
+</BaseLayout>
