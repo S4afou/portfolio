@@ -1,7 +1,8 @@
 # Content guide
 
 Everything a visitor reads comes from data files. You can add a Project, publish a Repository,
-replace the CV, or add an Achievement without opening a layout or component.
+replace the CV, add a certification, or edit Education, Experience, Leadership, skills, and languages
+without opening a layout or component.
 
 After any change, run:
 
@@ -86,12 +87,20 @@ the Home grid), `draft` (defaults to `false`; set `true` to hide a Project from 
 - Reference them with an absolute path beginning `/projects/<slug>/...`.
 - Every image needs non-empty `alt`. Captions are optional.
 - The build fails, naming the Project and the path, when a referenced file does not exist.
-- `cover` is displayed at 16:9; supply a landscape image. Keep files under ~300 KB.
+- `cover` is displayed at 16:9; supply a landscape image. Project cards use the same 16:9 frame.
+  Keep files under ~300 KB.
+- Use photographic, external, or real report figures for covers. Do not invent a system diagram as a
+  cover. A report plate may be cropped or placed on a dark canvas, but the underlying figure should
+  remain recognisable.
+- Record the source and licence for every external image in `docs/project-facts.md`.
 
 ### Order and sequence
 
-`order` controls the sequence on the Home page and the Projects index. The four launch Projects are
-ordered 1–4 and the copy assumes you read them in that order.
+`order` controls the sequence on the Projects index. Home shows only the Projects with
+`featured: true`, in `order` sequence, followed by a “Show all 6 projects” link.
+
+The current sequence is Pocket OMR (1), Spell Caster (2), H-GATE (3), NASA Shuttle (4), AdaIN style
+transfer (5), and Eigenfaces/Fisherfaces (6). Only 1–4 are featured.
 
 ## Publish a Repository
 
@@ -105,8 +114,8 @@ repos:
 
 | Status | What renders |
 | --- | --- |
-| `pending` | A non-interactive `PUBLISHING SOON` badge; no anchor. |
-| `private` | A non-interactive `PRIVATE REPOSITORY` badge; no anchor. |
+| `pending` | A non-interactive publishing-soon badge; no anchor. |
+| `private` | A non-interactive private-repository badge; no anchor. |
 | `published` | A real link. A `published` entry **without** a `url` fails validation. |
 
 To publish, add the URL and change the status:
@@ -127,32 +136,54 @@ Replace the file at `public/cv/medjahri-mohammed-safouane-cv.pdf`, keeping the s
 button updates automatically.
 
 If you change the filename, update `cv` in `src/lib/site.ts`. The same file holds the name, role,
-email, LinkedIn, GitHub, location, and availability used in the header, footer, and contact block.
+email, LinkedIn, GitHub, location, availability, and the language list used in the header, footer,
+contact block, and Dossier.
 
-## Add an Achievement or certification
+## Edit Education, Experience, and Leadership
 
-Edit `src/lib/achievements.ts` and append an object:
+These lists live in `src/lib/background.ts`:
+
+- `EDUCATION` — degrees and the baccalaureate, newest first.
+- `EXPERIENCE` — professional roles and internships.
+- `LEADERSHIP` — student-club offices and extracurricular responsibilities. Keep these separate from
+  professional Experience.
+- `CERTIFICATIONS` — certifications and awards.
+
+Education, Experience, and Leadership entries use the same shape:
+
+```ts
+{
+  period: 'Sep 2025',
+  title: 'Network & Security Engineering Intern',
+  org: 'Space Techniques Center (CTS), Arzew',
+  detail: 'One or two sentences on what it involved.',
+}
+```
+
+`period` is display text; the arrays are shown in the order you write them.
+
+## Add a certification or award
+
+Append an object to `CERTIFICATIONS` in `src/lib/background.ts`:
 
 ```ts
 {
   period: 'Jun 2026',
-  sort: 202606,
   title: 'Certification name',
-  org: 'Issuing organisation',
-  detail: 'One or two sentences on what it involved.',
-  kind: 'certification',
+  issuer: 'Issuing organisation',
+  detail: 'Optional one-line context.',
 }
 ```
 
-- `sort` is `YYYYMM` and controls the order (newest first). `period` is the text shown.
-- `kind` is `'achievement'` or `'certification'`; both render in the same timeline.
-- New entries automatically appear on About. The Home "Track record" teaser shows the four most
-  recent by `sort`, so a new certification will appear there too.
+The About page hides the entire “Certifications & awards” section while `CERTIFICATIONS` is empty.
+Add the first entry and the section appears; no layout change is needed.
 
-## Edit "More work"
+## Edit skills and languages
 
-`src/lib/more-work.ts` holds the two short entries (AdaIN, Eigenfaces/Fisherfaces). Keep it to those
-two; anything that deserves a page should be a Project instead.
+- `src/lib/skills.ts` holds the four `SKILL_GROUPS` shown under “Skills & languages”.
+- The language list is `LANGUAGES` in `src/lib/site.ts`.
+
+Both the Home page and About show these sections. Keep the groups aligned with the CV.
 
 ## What stays out
 
@@ -165,3 +196,7 @@ excluded by agreement. The contract tests assert that none of them appear in the
 - Report a metric with its name and the setting it was measured in.
 - Name what you personally built, especially on team Projects.
 - Do not claim a decisive win over a strong baseline when the margin is small.
+- Label planned work as planned. AdaIN's 15–30 FPS video throughput is expected, not measured; the
+  150 ms at 512×512 is measured.
+- Use 54× fewer dimensions only for the 75-component Eigenfaces model. Fisherfaces is reported at 39
+  final dimensions; do not attach the 54× or 105× ratio to that configuration.
