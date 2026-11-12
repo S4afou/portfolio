@@ -82,13 +82,13 @@ gameplay/report frames; record the source and licence in `docs/project-facts.md`
 ## Design notes
 
 - Dark only. Black base, near-white text, one red accent. No analytics, cookies, or third-party embeds.
-- Typography: Archivo for display and UI, Newsreader italic for short accents, Geist Mono only for
-  numeric data. All self-hosted through Fontsource.
+- Typography: Archivo for display and UI, Newsreader italic for short accents, Geist Mono for
+  numeric data and small index labels. All self-hosted through Fontsource.
 - Layout is compact and sectioned: soft-bordered panels, a 76rem measure, generous but controlled
   spacing, and a section order inspired by the peer portfolio. Cards stay 16:9.
-- Ambient motion: radial glows, a masked grid, a stack ticker, an orbiting hero mark, and
-  reveal-on-scroll. All motion is suppressed under reduced motion and content remains visible without
-  JavaScript.
+- Ambient motion: radial glows, a masked grid, a stack ticker, a portrait index plate, a
+  reading-progress bar, and reveal-on-scroll. All motion is suppressed under reduced motion and
+  content remains visible without JavaScript.
 - The umbrella mark is an original inline SVG, not Capcom's logo.
 - The custom cursor is an original 8-panel red/white canopy, not a trace of the Umbrella Corporation
   logo. It is applied only for fine pointers with motion allowed; it is disabled for touch and under
