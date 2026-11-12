@@ -1,6 +1,6 @@
 # 01: Foundation and visual system
 
-**What to build:** A statically built Astro + Tailwind site that serves a branded shell — the Umbrella palette, clinical typography, the original umbrella mark, header and footer navigation, a skip link, a 404 page, a favicon and a downloadable CV. Dark only, responsive from 360 px up. Every page carries the full name and never the phone number. The umbrella cursor appears only on fine pointers and disappears for touch and reduced-motion visitors.
+**What to build:** A statically built Astro + Tailwind site that serves a branded shell, the Umbrella palette, clinical typography, the original umbrella mark, header and footer navigation, a skip link, a 404 page, a favicon and a downloadable CV. Dark only, responsive from 360 px up. Every page carries the full name and never the phone number. The umbrella cursor appears only on fine pointers and disappears for touch and reduced-motion visitors.
 
 **Blocked by:** None (can start immediately)
 

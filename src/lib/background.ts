@@ -14,13 +14,13 @@ export type CertificationEntry = {
 
 export const EDUCATION: Entry[] = [
   {
-    period: '2024 — Present',
+    period: '2024 to Present',
     title: 'Higher Cycle (Engineering)',
     org: 'ESI-SBA · Artificial Intelligence & Data Science',
     detail: 'Engineering cycle in artificial intelligence and data science.',
   },
   {
-    period: '2022 — 2024',
+    period: '2022 to 2024',
     title: 'Preparatory Cycle',
     org: 'ESI-SBA',
     detail: 'Intensive mathematics and computer science.',
@@ -42,7 +42,7 @@ export const EXPERIENCE: Entry[] = [
       'Deployed VLANs, trunks, and SSH on Cisco routers to secure internal communications, and integrated a FortiGate 400E firewall to filter traffic.',
   },
   {
-    period: 'Aug — Nov 2024',
+    period: 'Aug to Nov 2024',
     title: 'English Instructor',
     org: 'Zenith Academy',
     detail: 'Taught English to groups of students while completing the engineering cycle.',
@@ -51,13 +51,13 @@ export const EXPERIENCE: Entry[] = [
 
 export const LEADERSHIP: Entry[] = [
   {
-    period: '2024 — 2025',
+    period: '2024 to 2025',
     title: 'HR Manager',
     org: 'Ingeniums Club',
     detail: 'Ran recruitment and internal coordination for the student club.',
   },
   {
-    period: '2024 — 2025',
+    period: '2024 to 2025',
     title: 'Finance Manager',
     org: 'GDG SBA',
     detail: 'Managed the budget and sponsorship tracking for the Google Developer Group chapter.',

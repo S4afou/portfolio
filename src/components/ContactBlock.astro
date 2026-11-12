@@ -1,67 +1,158 @@
 ---
+import { CONTACT_SUBJECTS, mailto } from '../lib/contact';
 import { SITE } from '../lib/site';
+import Mark from './Mark.astro';
 ---
 
-<section aria-labelledby="contact" class="shell mt-24 border-t border-line pt-10">
-  <div class="grid gap-10 lg:grid-cols-[1.3fr_1fr] lg:gap-16">
-    <div>
-      <p class="label">Contact</p>
-      <h2 id="contact" class="h-section mt-4 max-w-2xl">
-        Let's talk about a PFE or <span class="serif">research internship.</span>
-      </h2>
-      <p class="mt-5 max-w-lg text-sm leading-relaxed text-muted">
-        Email is the fastest way to reach me. I answer in English, French, or Arabic, and I am happy to
-        walk through any Project on this site.
-      </p>
+<section id="contact" aria-labelledby="contact-title" class="shell mt-16">
+  <div class="card relative overflow-hidden p-6 md:p-10">
+    <div
+      class="pointer-events-none absolute -right-24 -top-28 h-80 w-80 rounded-full bg-blood/25 blur-[90px]"
+      aria-hidden="true"
+    >
     </div>
+    <Mark
+      size={280}
+      class="pointer-events-none absolute -bottom-16 -right-10 hidden text-paper/[0.055] md:block"
+    />
 
-    <ul class="divide-y divide-line">
-      <li>
-        <a class="group flex items-center justify-between gap-5 py-4" href={`mailto:${SITE.email}`}>
-          <span class="text-sm text-muted">Email</span>
-          <span class="flex items-center gap-3 text-sm font-medium">
-            <span class="break-all">{SITE.email}</span>
-            <span class="text-muted transition group-hover:text-blood" aria-hidden="true">↗</span>
-          </span>
-        </a>
-      </li>
-      <li>
-        <a
-          class="group flex items-center justify-between gap-5 py-4"
-          href={SITE.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span class="text-sm text-muted">LinkedIn</span>
-          <span class="flex items-center gap-3 text-sm font-medium">
-            <span class="break-all text-right">{SITE.linkedinHandle}</span>
-            <span class="text-muted transition group-hover:text-blood" aria-hidden="true">↗</span>
-          </span>
-        </a>
-      </li>
-      <li>
-        <a
-          class="group flex items-center justify-between gap-5 py-4"
-          href={SITE.github}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <span class="text-sm text-muted">GitHub</span>
-          <span class="flex items-center gap-3 text-sm font-medium">
-            <span>{SITE.githubHandle}</span>
-            <span class="text-muted transition group-hover:text-blood" aria-hidden="true">↗</span>
-          </span>
-        </a>
-      </li>
-      <li>
-        <a class="group flex items-center justify-between gap-5 py-4" href={SITE.cv} download>
-          <span class="text-sm text-muted">CV</span>
-          <span class="flex items-center gap-3 text-sm font-medium">
-            <span>Download PDF</span>
-            <span class="text-muted transition group-hover:text-blood" aria-hidden="true">↓</span>
-          </span>
-        </a>
-      </li>
-    </ul>
+    <div class="relative grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+      <div>
+        <p class="eyebrow">Contact</p>
+        <h2 id="contact-title" class="h-section mt-4 max-w-xl">
+          Let's talk about a PFE or <span class="serif text-paper">research internship.</span>
+        </h2>
+        <p class="mt-4 max-w-lg text-sm leading-relaxed text-muted">
+          Email is the fastest way to reach me. I answer in English, French, or Arabic, and I am happy to
+          walk through any project on this site.
+        </p>
+        <div class="mt-7 flex flex-wrap items-center gap-3">
+          <a class="btn btn-solid" href={mailto(CONTACT_SUBJECTS.internship)}>
+            Email me <span aria-hidden="true">↗</span>
+          </a>
+          <a class="btn btn-ghost" href={SITE.cv} download>Download CV</a>
+        </div>
+
+        <div class="mt-6 max-w-lg" data-copy-block>
+          <p class="text-xs leading-relaxed text-muted">
+            If the email button does nothing, your browser has no mail app registered. Copy the address
+            instead:
+          </p>
+          <div class="mt-2.5 flex flex-wrap items-center gap-2">
+            <code class="mono rounded-lg border border-line/80 bg-void/40 px-3 py-2 text-xs text-paper/90">
+              {SITE.email}
+            </code>
+            <button type="button" class="btn btn-ghost" data-copy-email={SITE.email}>Copy email</button>
+          </div>
+          <p class="mt-2 text-xs text-muted" data-copy-status aria-live="polite"></p>
+        </div>
+      </div>
+
+      <ul class="divide-y divide-line/80 border-t border-line/80 lg:border-t-0">
+        <li>
+          <a
+            class="group flex items-center justify-between gap-5 py-4 lg:pt-0"
+            href={mailto(CONTACT_SUBJECTS.general)}
+          >
+            <span class="text-xs uppercase tracking-[0.14em] text-muted">Email</span>
+            <span class="flex items-center gap-3 text-sm font-medium">
+              <span class="break-all text-right">{SITE.email}</span>
+              <span class="text-muted transition group-hover:text-ember" aria-hidden="true">↗</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a
+            class="group flex items-center justify-between gap-5 py-4"
+            href={SITE.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`LinkedIn profile (${SITE.linkedinHandle})`}
+            title={SITE.linkedinHandle}
+          >
+            <span class="text-xs uppercase tracking-[0.14em] text-muted">LinkedIn</span>
+            <span class="flex items-center gap-3 text-sm font-medium">
+              <span>Connect</span>
+              <span class="text-muted transition group-hover:text-ember" aria-hidden="true">↗</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a
+            class="group flex items-center justify-between gap-5 py-4"
+            href={SITE.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`GitHub profile (${SITE.githubHandle})`}
+            title={SITE.githubHandle}
+          >
+            <span class="text-xs uppercase tracking-[0.14em] text-muted">GitHub</span>
+            <span class="flex items-center gap-3 text-sm font-medium">
+              <span>View code</span>
+              <span class="text-muted transition group-hover:text-ember" aria-hidden="true">↗</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="group flex items-center justify-between gap-5 py-4" href={SITE.cv} download>
+            <span class="text-xs uppercase tracking-[0.14em] text-muted">CV</span>
+            <span class="flex items-center gap-3 text-sm font-medium">
+              <span>Download PDF</span>
+              <span class="text-muted transition group-hover:text-ember" aria-hidden="true">↓</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </section>
+
+<script>
+  async function copyText(text: string) {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+    } catch {
+      // Fall through to the selection-based copy for browsers that block the API.
+    }
+
+    const field = document.createElement('textarea');
+    field.value = text;
+    field.setAttribute('readonly', '');
+    field.style.position = 'fixed';
+    field.style.top = '0';
+    field.style.left = '-9999px';
+    document.body.appendChild(field);
+    field.select();
+
+    let copied = false;
+    try {
+      copied = document.execCommand('copy');
+    } catch {
+      copied = false;
+    } finally {
+      document.body.removeChild(field);
+    }
+
+    return copied;
+  }
+
+  for (const button of Array.from(document.querySelectorAll('[data-copy-email]'))) {
+    button.addEventListener('click', async () => {
+      const email = button.getAttribute('data-copy-email');
+      if (!email) return;
+
+      const block = button.closest('[data-copy-block]');
+      const status = block?.querySelector('[data-copy-status]');
+      const copied = await copyText(email);
+
+      if (status) {
+        status.textContent = copied
+          ? `Copied ${email}`
+          : `Could not copy automatically. Select ${email} and copy it.`;
+      }
+    });
+  }
+</script>

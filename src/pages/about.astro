@@ -1,25 +1,43 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EntryList from '../components/EntryList.astro';
+import Mark from '../components/Mark.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import ToolkitStrip from '../components/ToolkitStrip.astro';
 import { CERTIFICATIONS, EDUCATION, EXPERIENCE, LEADERSHIP } from '../lib/background';
+import { CONTACT_SUBJECTS, mailto } from '../lib/contact';
+import { FOCUS_LABEL } from '../lib/focus';
 import { SITE } from '../lib/site';
+
+const strengths = [
+  {
+    title: 'Rigour over demo screenshots',
+    body: 'Every project names the metric, the setting it was measured in, and the result that did not flatter me.',
+  },
+  {
+    title: 'Ownership from data to deployment',
+    body: 'Collection, cleaning, training, serving, and the monitoring loop that keeps the model honest.',
+  },
+  {
+    title: 'Clear written handoff',
+    body: 'Work documented so someone else can run it, question it, and improve it without asking me first.',
+  },
+];
 ---
 
 <BaseLayout
   title="About"
-  description="Medjahri Mohammed Safouane — AI & Data Science engineering student at ESI-SBA. Education, experience, leadership, skills, and languages."
+  description="Medjahri Mohammed Safouane, AI & Data Science engineering student at ESI-SBA. Education, experience, leadership, skills, and languages."
 >
-  <section class="shell pt-14 md:pt-24">
-    <p class="label">Profile</p>
-    <h1 class="h-display mt-5">About</h1>
-    <p class="serif mt-6 max-w-2xl text-[clamp(1.5rem,3vw,2.25rem)] leading-[1.15] text-paper">
+  <section class="shell pt-12 md:pt-16">
+    <p class="eyebrow">Profile</p>
+    <h1 class="h-display mt-4">About</h1>
+    <p class="serif mt-5 max-w-2xl text-[clamp(1.35rem,2.5vw,1.9rem)] leading-[1.2] text-paper">
       I care about what happens after the demo.
     </p>
 
-    <div class="mt-10 grid items-start gap-12 lg:grid-cols-[1.5fr_1fr]">
-      <div class="flex max-w-2xl flex-col gap-5 text-base leading-relaxed text-muted">
+    <div class="mt-8 grid items-start gap-10 lg:grid-cols-[1.4fr_0.6fr] lg:gap-14">
+      <div class="flex max-w-2xl flex-col gap-4 text-sm leading-relaxed text-muted md:text-base">
         <p>
           I am an AI &amp; Data Science engineering student at ESI-SBA in Sidi Bel Abbès. I came in
           through the mathematics preparatory cycle, and most of what I enjoy sits where a model meets
@@ -27,50 +45,57 @@ import { SITE } from '../lib/site';
           CPU, a detector that notices its own drift.
         </p>
         <p>
-          My Projects tend to start with data collection and end with something that can be run. I
-          care about evaluation more than demo screenshots, which is why every Project here names the
+          My projects tend to start with data collection and end with something that can be run. I
+          care about evaluation more than demo screenshots, which is why every project here names the
           metric, the setting it was measured in, and what I would do differently. Some of that means
           reporting worse numbers than a CV bullet would: the figures on this site are the measured
           ones.
         </p>
         <p>
           I am looking for a PFE or research internship where I can own an applied machine-learning
-          problem end to end — particularly computer vision, speech, and the monitoring work that
-          keeps a deployed model honest. I work in Python, mostly with PyTorch and scikit-learn, and I
-          am comfortable with the parts nobody puts in a demo: labels, pipelines, and the number
-          everyone would rather not report.
+          problem end to end, particularly computer vision, NLP, and deep learning, plus the
+          monitoring work that keeps a deployed model honest. I work in Python, mostly with PyTorch
+          and scikit-learn, and I am comfortable with the parts nobody puts in a demo: labels,
+          pipelines, and the number everyone would rather not report.
         </p>
       </div>
 
-      <aside class="h-fit lg:border-l lg:border-line lg:pl-8">
-        <p class="label">Open to</p>
-        <p class="mt-2 text-sm">{SITE.availability}.</p>
-        <p class="mt-5 label">Based in</p>
-        <p class="mt-1 text-sm">{SITE.location}</p>
-        <div class="mt-6 flex flex-col items-start gap-4">
-          <a class="btn btn-solid" href={SITE.cv} download>Download CV</a>
-          <a class="btn-text" href={`mailto:${SITE.email}`}>Email me <span aria-hidden="true">↗</span></a>
+      <aside class="card relative overflow-hidden p-5" data-reveal>
+        <Mark size={160} class="pointer-events-none absolute -bottom-8 -right-8 hidden text-paper/[0.05] sm:block" />
+        <div class="relative">
+          <p class="label">Open to</p>
+          <p class="mt-1.5 flex items-start gap-2 text-sm">
+            <span class="pulse-dot mt-1.5" aria-hidden="true"></span>
+            {SITE.availability}
+          </p>
+          <p class="mt-5 label">Based in</p>
+          <p class="mt-1.5 text-sm">{SITE.location}</p>
+          <p class="mt-5 label">Focus</p>
+          <p class="mt-1.5 text-sm">{FOCUS_LABEL}</p>
+          <div class="mt-6 flex flex-col items-start gap-3">
+            <a class="btn btn-solid" href={SITE.cv} download>Download CV</a>
+            <a class="btn-text" href={mailto(CONTACT_SUBJECTS.general)}>Email me <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
       </aside>
     </div>
   </section>
 
-  <section aria-labelledby="education" class="shell mt-20">
-    <SectionHeading title="Education" id="education" />
-
+  <section aria-labelledby="education" class="shell mt-16">
+    <SectionHeading title="Education" id="education" eyebrow="Background" />
     <EntryList entries={EDUCATION} />
   </section>
 
-  <section aria-labelledby="experience" class="shell mt-16">
-    <SectionHeading title="Experience" id="experience" />
-
+  <section aria-labelledby="experience" class="shell mt-14">
+    <SectionHeading title="Experience" id="experience" eyebrow="Work" />
     <EntryList entries={EXPERIENCE} />
   </section>
 
-  <section aria-labelledby="leadership" class="shell mt-16">
+  <section aria-labelledby="leadership" class="shell mt-14">
     <SectionHeading
       title="Leadership & extracurricular"
       id="leadership"
+      eyebrow="Community"
       note="Student-club offices, kept separate from professional Experience."
     />
 
@@ -79,12 +104,35 @@ import { SITE } from '../lib/site';
 
   {
     CERTIFICATIONS.length > 0 && (
-      <section aria-labelledby="certifications" class="shell mt-16">
-        <SectionHeading title="Certifications & awards" id="certifications" />
+      <section aria-labelledby="certifications" class="shell mt-14">
+        <SectionHeading title="Certifications & awards" id="certifications" eyebrow="Credentials" />
         <EntryList entries={CERTIFICATIONS} />
       </section>
     )
   }
+
+  <section aria-labelledby="strengths" class="shell mt-14">
+    <SectionHeading
+      title="What I bring to a team"
+      id="strengths"
+      eyebrow="Working style"
+      note="The habits behind the project write-ups."
+    />
+
+    <div class="mt-5 grid gap-3 md:grid-cols-3">
+      {
+        strengths.map((item, index) => (
+          <article class="card card-hover p-5" data-reveal>
+            <span class="font-mono text-[0.66rem] tracking-[0.16em] text-ember">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+            <h3 class="mt-4 text-sm font-semibold">{item.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-muted">{item.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
 
   <ToolkitStrip />
 </BaseLayout>

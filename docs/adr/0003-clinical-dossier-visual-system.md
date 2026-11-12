@@ -34,7 +34,8 @@ The palette keeps ADR-0002’s black, near-white, and single-red premise. The vo
 
 ## Consequences
 
-- The site no longer shares the section order or visual grammar of `inas-soummar.vercel.app` or `sarra-zerguerras-portfolio.vercel.app`; only the audience-facing coverage (identity, Projects, skills, experience, contact) overlaps.
+- The v2 layout below is superseded for layout and card treatment by ADR-0004 (compact portfolio layout). The palette premise, type families, mark, and content rules below still stand; ADR-0004 tunes the palette values and permits small numeric index labels. The cursor is superseded by ADR-0005, which replaces the outline umbrella with an original 8-panel canopy and records the focus and contact vocabulary.
+- The site no longer shares the section order or visual grammar of `inas-soummar.vercel.app`; only the audience-facing coverage (identity, Projects, skills, experience, contact) overlaps. ADR-0004 deliberately adopts the compact section order of `sarra-zerguerras-portfolio.vercel.app` while keeping this site's dark visual system.
 - The type system needs three font families and a deliberate hierarchy; adding a new section means choosing a heading scale and rule treatment rather than dropping in a card component.
 - Report-derived covers are denser than photographs, especially at 360px. They are kept because they are real evidence and because a synthetic cover would violate the “no generated diagrams” rule.
-- The claims ledger remains authoritative. In particular, AdaIN’s 150 ms at 512×512 is measured while 15–30 FPS at 256px is expected; the 54× reduction belongs to the 75-component Eigenfaces model, not the 39-dimensional Fisherfaces configuration.
+- The claims ledger remains authoritative. In particular, AdaIN’s 150 ms at 512×512 is measured while 15 to 30 FPS at 256px is expected; the 54× reduction belongs to the 75-component Eigenfaces model, not the 39-dimensional Fisherfaces configuration.

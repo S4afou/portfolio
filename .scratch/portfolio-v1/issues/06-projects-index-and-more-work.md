@@ -2,7 +2,7 @@
 
 **What to build:** A Projects index that lets a visitor scan all four Projects and choose what to read, then a short strip for the work that does not warrant a full page. Excluded work must be genuinely absent, not merely unlinked.
 
-**Blocked by:** 05 — Shuttle Anomaly Detection Project page
+**Blocked by:** 05, Shuttle Anomaly Detection Project page
 
 **Status:** done
 

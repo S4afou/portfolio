@@ -4,6 +4,7 @@ import matter from 'gray-matter';
 import { describe, expect, it } from 'vitest';
 import { CERTIFICATIONS } from '../src/lib/background';
 import { projectSchema } from '../src/lib/project-schema';
+import { SITE } from '../src/lib/site';
 
 const root = process.cwd();
 const contentDir = path.join(root, 'src', 'content', 'projects');
@@ -84,6 +85,9 @@ describe('content-to-page contract', () => {
       }
       expect(project.data.stack.length).toBeGreaterThan(1);
       expect(project.data.results.length).toBeGreaterThan(1);
+      expect(project.data.research?.length ?? 0, `${project.slug}.research`).toBeGreaterThan(0);
+      expect(project.data.comparison?.length ?? 0, `${project.slug}.comparison`).toBeGreaterThan(1);
+      expect(project.data.contribution?.length ?? 0, `${project.slug}.contribution`).toBeGreaterThan(0);
     }
   });
 
@@ -107,7 +111,10 @@ describe('content-to-page contract', () => {
       }
 
       if (unpublished.length > 0) {
-        expect(page.html).toContain('Publishing soon');
+        expect(page.html).not.toContain('Publishing soon');
+        for (const repo of unpublished) {
+          expect(page.html).not.toContain(repo.label);
+        }
       }
 
       for (const repo of published) {
@@ -132,9 +139,44 @@ describe('content-to-page contract', () => {
     }
   });
 
+  it('uses the owner portrait in the home hero', () => {
+    const home = pages.find((page) => page.route === '')?.html ?? '';
+    const portrait = images(home).find((image) => image.src === '/portrait.webp');
+
+    expect(portrait?.alt).toContain('Medjahri Mohammed Safouane');
+    expect(fs.existsSync(path.join(distDir, 'portrait.webp'))).toBe(true);
+  });
+
   it('never publishes the phone number', () => {
     for (const page of pages) {
       expect(page.html).not.toMatch(/\+213|699\s?078\s?698/);
+    }
+  });
+
+  it('uses no em or en dashes, bars, or minus signs in copy, metadata, docs, or tests', () => {
+    const forbidden = /[\u2013\u2014\u2015\u2212]/;
+
+    for (const page of pages) {
+      expect(page.html, page.route).not.toMatch(forbidden);
+    }
+
+    const extensions = /\.(astro|ts|css|md|mjs)$/;
+    const collect = (dir: string): string[] =>
+      fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+        const full = path.join(dir, entry.name);
+        if (entry.isDirectory()) return collect(full);
+
+        return extensions.test(entry.name) ? [full] : [];
+      });
+
+    const files = [
+      ...['src', 'docs', 'tests'].flatMap((dir) => collect(path.join(root, dir))),
+      path.join(root, 'README.md'),
+      path.join(root, 'GLOSSARY.md'),
+    ];
+
+    for (const file of files) {
+      expect(fs.readFileSync(file, 'utf8'), path.relative(root, file)).not.toMatch(forbidden);
     }
   });
 
@@ -154,6 +196,76 @@ describe('content-to-page contract', () => {
     }
   });
 
+  it('presents LinkedIn and GitHub as clean actions with safe external links', () => {
+    const home = pages.find((page) => page.route === '')?.html ?? '';
+    const homeText = textContent(home);
+    const homeAnchors = anchors(home);
+
+    expect(homeText).not.toContain('mohammed-safouane-medjahri-0bb181296');
+    expect(homeText).not.toContain('S4afou');
+
+    const linkedin = homeAnchors.find((anchor) => anchor.href === SITE.linkedin);
+    const github = homeAnchors.find((anchor) => anchor.href === SITE.github);
+
+    expect(linkedin?.text).toContain('Connect');
+    expect(github?.text).toContain('View code');
+
+    for (const anchor of [linkedin, github]) {
+      expect(anchor?.tag).toContain('target="_blank"');
+      expect(anchor?.tag).toContain('rel="noopener noreferrer"');
+    }
+  });
+
+  it('positions the owner focus on computer vision, NLP, and deep learning', () => {
+    const home = textContent(pages.find((page) => page.route === '')?.html ?? '');
+    const about = textContent(pages.find((page) => page.route === 'about')?.html ?? '');
+    const archive = textContent(pages.find((page) => page.route === 'projects')?.html ?? '');
+
+    for (const text of [home, about, archive]) {
+      expect(text).toContain('Computer vision');
+      expect(text).toContain('NLP');
+      expect(text).toContain('Deep learning');
+    }
+
+    expect(home).toContain('Vision · NLP · Deep learning');
+    expect(home).not.toContain('Speech · MLOps');
+    expect(home).toContain('Natural language processing');
+    expect(about).toContain('Vision · NLP · Deep learning');
+  });
+
+  it('prefills contact subjects and exposes Contact in the navigation', () => {
+    const home = pages.find((page) => page.route === '')?.html ?? '';
+    const project = pages.find((page) => page.route === 'projects/pocket-omr')?.html ?? '';
+
+    expect(
+      anchors(home).some((anchor) => anchor.href.includes('subject=Portfolio%20enquiry'))
+    ).toBe(true);
+    expect(
+      anchors(home).some((anchor) => anchor.href.includes('subject=PFE%20%2F%20internship%20enquiry'))
+    ).toBe(true);
+    expect(
+      anchors(project).some((anchor) =>
+        anchor.href.includes('subject=Question%20about%20Pocket%20OMR')
+      )
+    ).toBe(true);
+
+    for (const page of pages) {
+      expect(
+        anchors(page.html).some((anchor) => anchor.href === '/#contact' && anchor.text === 'Contact')
+      ).toBe(true);
+    }
+  });
+
+  it('keeps a visible email fallback and a copy action when no mail handler exists', () => {
+    const home = pages.find((page) => page.route === '')?.html ?? '';
+    const text = textContent(home);
+
+    expect(text).toContain(SITE.email);
+    expect(text).toContain('Copy email');
+    expect(home).toContain(`data-copy-email="${SITE.email}"`);
+    expect(home).toContain(`mailto:${SITE.email}`);
+  });
+
   it('features four Projects on the home page and links the full index', () => {
     const home = pages.find((page) => page.route === '')?.html ?? '';
     const featured = projects.filter((project) => project.data.featured);
@@ -170,9 +282,13 @@ describe('content-to-page contract', () => {
       expect(anchors(home).some((anchor) => anchor.href === `/projects/${project.slug}`)).toBe(false);
     }
 
-    expect(anchors(home).some((anchor) => anchor.href === '/projects' && anchor.text.includes('Show all 6 projects'))).toBe(
+    expect(anchors(home).some((anchor) => anchor.href === '/projects' && anchor.text.includes('Show all projects'))).toBe(
       true
     );
+    expect(
+      anchors(home).filter((anchor) => anchor.href === '/projects' && anchor.text.includes('Show all projects'))
+    ).toHaveLength(1);
+    expect(anchors(home).some((anchor) => anchor.text === 'All projects')).toBe(false);
 
     for (const project of projects) {
       expect(anchors(archive).some((anchor) => anchor.href === `/projects/${project.slug}`)).toBe(true);
@@ -183,11 +299,64 @@ describe('content-to-page contract', () => {
     const adain = pages.find((page) => page.route === 'projects/adain-style-transfer')?.html ?? '';
     const faces = pages.find((page) => page.route === 'projects/eigenfaces-fisherfaces')?.html ?? '';
 
-    expect(textContent(adain)).toContain('AdaIN Style Transfer');
+    expect(textContent(adain)).toContain(
+      'AdaIN Style Transfer: Arbitrary Neural Style Transfer with Adaptive Instance Normalization'
+    );
     expect(textContent(adain)).toContain('150 ms');
-    expect(textContent(faces)).toContain('Eigenfaces & Fisherfaces');
+    expect(textContent(faces)).toContain(
+      'Eigenfaces & Fisherfaces: Classical Face Recognition on Olivetti Faces'
+    );
     expect(textContent(faces)).toContain('54×');
     expect(textContent(faces)).toContain('97.25%');
+  });
+
+  it('uses the full project name as the page heading and the short name in cards and navigation', () => {
+    const home = textContent(pages.find((page) => page.route === '')?.html ?? '');
+    const archive = textContent(pages.find((page) => page.route === 'projects')?.html ?? '');
+    const ordered = [...projects].sort((a, b) => a.data.order - b.data.order);
+
+    for (const project of projects) {
+      const page = pages.find((entry) => entry.route === `projects/${project.slug}`)?.html ?? '';
+      const heading = /<h1[^>]*class="[^"]*h-project[^"]*"[^>]*>([\s\S]*?)<\/h1>/.exec(page)?.[1] ?? '';
+      const breadcrumb =
+        /<span aria-current="page" class="text-paper\/70">([^<]+)<\/span>/.exec(page)?.[1] ?? '';
+      const shortTitle = project.data.shortTitle ?? project.data.title;
+      const position = ordered.findIndex((entry) => entry.slug === project.slug);
+
+      expect(textContent(heading).replace(/\s+/g, ' ').trim()).toBe(project.data.title);
+      expect(textContent(breadcrumb).replace(/\s+/g, ' ').trim()).toBe(shortTitle);
+      expect(archive).toContain(shortTitle);
+
+      if (position > 0) {
+        expect(textContent(page), `${project.slug} previous label`).toContain(
+          ordered[position - 1].data.shortTitle ?? ordered[position - 1].data.title
+        );
+      }
+      if (position < ordered.length - 1) {
+        expect(textContent(page), `${project.slug} next label`).toContain(
+          ordered[position + 1].data.shortTitle ?? ordered[position + 1].data.title
+        );
+      }
+
+      if (project.data.shortTitle) {
+        expect(home).not.toContain(project.data.title);
+        expect(archive).not.toContain(project.data.title);
+      }
+    }
+  });
+
+  it('adds research, comparison, and personal contribution to every Project', () => {
+    for (const project of projects) {
+      const page = pages.find((entry) => entry.route === `projects/${project.slug}`)?.html ?? '';
+      const text = textContent(page);
+
+      expect(text).toContain('Research & prior art');
+      expect(text).toContain('Approaches compared');
+      expect(text).toContain('What I personally built');
+      expect(project.data.research?.length ?? 0).toBeGreaterThan(0);
+      expect(project.data.comparison?.length ?? 0).toBeGreaterThan(1);
+      expect(project.data.contribution?.length ?? 0).toBeGreaterThan(0);
+    }
   });
 
   it('separates Leadership from Certifications and keeps skills and languages visible', () => {

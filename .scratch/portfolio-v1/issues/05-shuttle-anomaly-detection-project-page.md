@@ -2,7 +2,7 @@
 
 **What to build:** The fourth complete Project page, treating the detector and the MLOps loop as one Project with a published Repository. The narrative leads with detection quality, then the production collapse under injected drift and the retraining trigger that caught it.
 
-**Blocked by:** 04 — H-GATE Project page
+**Blocked by:** 04, H-GATE Project page
 
 **Status:** done
 

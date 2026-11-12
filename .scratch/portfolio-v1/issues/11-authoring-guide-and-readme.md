@@ -2,7 +2,7 @@
 
 **What to build:** The handover. A content guide that lets someone with no frontend experience add a Project, flip a Repository from pending to published, add an Achievement or replace the CV, and a README that explains how to run, build and test the site.
 
-**Blocked by:** 10 — Content-to-page contract tests and build guardrails
+**Blocked by:** 10, Content-to-page contract tests and build guardrails
 
 **Status:** done
 

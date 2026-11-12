@@ -2,7 +2,7 @@
 
 **What to build:** The third complete Project page. It presents the malicious-URL stacking ensemble as a solo Project, with a defensible evaluation story and its confusion matrix, ROC curves and dataset-condition charts, without claiming a decisive win over a strong baseline.
 
-**Blocked by:** 03 — Spell Caster Project page
+**Blocked by:** 03, Spell Caster Project page
 
 **Status:** done
 

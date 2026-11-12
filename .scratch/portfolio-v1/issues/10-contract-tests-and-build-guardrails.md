@@ -1,8 +1,8 @@
 # 10: Content-to-page contract tests and build guardrails
 
-**What to build:** The two agreed seams, enforced by tests. One seam validates content before it can render; the other validates what a visitor actually receives from the built site. The suite must fail if the site starts lying — a dead Repository link, a missing image, an excluded Project leaking back in, or the phone number appearing.
+**What to build:** The two agreed seams, enforced by tests. One seam validates content before it can render; the other validates what a visitor actually receives from the built site. The suite must fail if the site starts lying, a dead Repository link, a missing image, an excluded Project leaking back in, or the phone number appearing.
 
-**Blocked by:** 09 — Sharing, SEO and accessibility pass
+**Blocked by:** 09, Sharing, SEO and accessibility pass
 
 **Status:** done
 

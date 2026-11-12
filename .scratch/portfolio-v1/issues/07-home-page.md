@@ -2,7 +2,7 @@
 
 **What to build:** The recruiter-facing cold open. Within one screen a visitor learns who this is, what they build, that they are available for a PFE or research internship, and how to act on it. Below that, the strongest four Projects, the brief "more work" entries, a compact toolkit strip and a short track record before the contact block.
 
-**Blocked by:** 06 — Projects index and More work
+**Blocked by:** 06, Projects index and More work
 
 **Status:** done
 

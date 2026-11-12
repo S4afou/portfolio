@@ -2,7 +2,7 @@
 
 **What to build:** The full personnel file: narrative, education, professional experience, grouped skills and the complete Achievement timeline, all backed by the CV-linked facts. Certifications that arrive later must slot into the timeline without a redesign.
 
-**Blocked by:** 07 — Home page
+**Blocked by:** 07, Home page
 
 **Status:** done
 

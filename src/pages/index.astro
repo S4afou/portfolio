@@ -1,98 +1,191 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactBlock from '../components/ContactBlock.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import ToolkitStrip from '../components/ToolkitStrip.astro';
-import { EXPERIENCE } from '../lib/background';
+import { EXPERIENCE, LEADERSHIP } from '../lib/background';
+import { CONTACT_SUBJECTS, mailto } from '../lib/contact';
+import { FOCUS_AREAS, FOCUS_LABEL } from '../lib/focus';
+import { getProjects } from '../lib/projects';
 import { LANGUAGES, SITE } from '../lib/site';
 
-const allProjects = (await getCollection('projects', ({ data }) => !data.draft)).sort(
-  (a, b) => a.data.order - b.data.order
-);
+const allProjects = await getProjects();
 const featured = allProjects.filter((project) => project.data.featured);
 
-const dossier = [
-  { label: 'Based in', value: SITE.location, marker: false },
-  { label: 'Status', value: SITE.availability, marker: true },
-  { label: 'Focus', value: 'Computer vision · Speech · MLOps', marker: false },
-  { label: 'Languages', value: LANGUAGES.join(' · '), marker: false },
+const ticker = [
+  'Python',
+  'PyTorch',
+  'scikit-learn',
+  'Computer vision',
+  'NLP',
+  'Deep learning',
+  'FastAPI',
+  'Docker',
+  'MLOps',
+  'Evaluation',
+  'Linux',
 ];
 ---
 
 <BaseLayout>
-  <section class="shell pt-14 md:pt-24">
-    <div class="grid items-start gap-12 lg:grid-cols-[1.55fr_1fr]">
+  <section class="shell relative pt-10 md:pt-16">
+    <div class="grid items-center gap-10 lg:grid-cols-[1.35fr_0.65fr] lg:gap-16">
       <div class="rise">
-        <p class="label flex items-center gap-2.5">
-          <span class="h-1.5 w-1.5 shrink-0 bg-blood" aria-hidden="true"></span>
-          AI &amp; Data Science engineering student · {SITE.school}
+        <p class="eyebrow">AI &amp; Data Science · {SITE.school}</p>
+
+        <h1 class="h-hero mt-6">
+          <span class="block">Medjahri</span>
+          <span class="serif serif-shine block text-[0.82em] font-normal">Mohammed Safouane</span>
+        </h1>
+
+        <p class="mt-6 max-w-xl text-base leading-relaxed text-muted md:text-lg">
+          I build end-to-end machine-learning systems across computer vision, NLP, and deep learning:{' '}
+          <span class="text-paper">the dataset, the model, and the pipeline that keeps it honest.</span>
         </p>
-        <h1 class="h-display mt-6">Medjahri<br />Mohammed<br />Safouane</h1>
-        <p class="mt-8 max-w-xl text-lg leading-relaxed text-muted md:text-xl">
-          I build end-to-end machine-learning systems:
-          <span class="serif text-paper">the dataset, the model, and the pipeline that keeps it honest.</span>
-        </p>
-        <div class="mt-9 flex flex-wrap items-center gap-x-7 gap-y-4">
-          <a class="btn btn-solid" href={`mailto:${SITE.email}`}>Email me</a>
-          <a class="btn-text" href={SITE.cv} download>Download CV <span aria-hidden="true">↓</span></a>
+
+        <div class="mt-8 flex flex-wrap items-center gap-3">
+          <a class="btn btn-solid" href={mailto(CONTACT_SUBJECTS.general)}>
+            Email me <span aria-hidden="true">↗</span>
+          </a>
+          <a class="btn btn-ghost" href="/projects">View projects</a>
+          <a class="btn-text ml-1" href={SITE.cv} download>Download CV <span aria-hidden="true">↓</span></a>
         </div>
+
+        <ul class="mt-8 flex flex-wrap gap-2">
+          <li class="chip">
+            <span class="pulse-dot" aria-hidden="true"></span>
+            {SITE.availability}
+          </li>
+          <li class="chip">{SITE.location}</li>
+          <li class="chip">{LANGUAGES.join(' · ')}</li>
+        </ul>
       </div>
 
-      <aside class="lg:pt-1">
-        <p class="label">Dossier</p>
-        <dl class="mt-3">
-          {
-            dossier.map((row, index) => (
-              <div
-                class:list={[
-                  'grid grid-cols-[6.5rem_minmax(0,1fr)] gap-4 border-t border-line py-4',
-                  index === dossier.length - 1 && 'border-b',
-                ]}
-              >
-                <dt class="label">{row.label}</dt>
-                <dd class={row.marker ? 'flex items-start gap-2 text-sm' : 'text-sm'}>
-                  {row.marker && <span class="mt-1.5 h-1.5 w-1.5 shrink-0 bg-blood" aria-hidden="true" />}
-                  <span>{row.value}</span>
-                </dd>
-              </div>
-            ))
-          }
-        </dl>
+      <aside class="mx-auto w-full max-w-[16rem] sm:max-w-sm lg:mx-0 lg:justify-self-end" data-reveal>
+        <div class="portrait flex aspect-[4/5] flex-col p-5">
+          <img
+            src="/portrait.webp"
+            alt="Portrait of Medjahri Mohammed Safouane"
+            width="960"
+            height="1200"
+            loading="eager"
+            decoding="async"
+            class="absolute inset-0 h-full w-full object-cover"
+          />
+          <div
+            class="absolute inset-0 bg-gradient-to-b from-void/70 via-transparent to-void/90"
+            aria-hidden="true"
+          >
+          </div>
+
+          <div class="relative z-10 flex items-center justify-between">
+            <span class="label drop-shadow-[0_1px_8px_rgba(0,0,0,0.9)]">Index 2026</span>
+            <span class="badge !text-paper/80">Available</span>
+          </div>
+
+          <div class="relative z-10 mt-auto grid grid-cols-2 gap-4 border-t border-paper/15 bg-void/45 pt-4 backdrop-blur-[2px]">
+            <div>
+              <p class="label !text-paper/60">Focus</p>
+              <p class="mt-1.5 text-xs leading-snug text-paper/90">{FOCUS_LABEL}</p>
+            </div>
+            <div>
+              <p class="label !text-paper/60">Based in</p>
+              <p class="mt-1.5 text-xs leading-snug text-paper/90">{SITE.location}</p>
+            </div>
+          </div>
+        </div>
       </aside>
     </div>
   </section>
 
-  <section aria-labelledby="projects" class="shell mt-24">
-    <SectionHeading title="Projects" id="projects" />
+  <div class="ticker mt-14 py-3" aria-hidden="true">
+    <div class="ticker-track">
+      {
+        [0, 1].map(() => (
+          <div class="flex shrink-0 items-center">
+            {ticker.map((item) => (
+              <span class="flex items-center gap-6 px-6 text-[0.7rem] uppercase tracking-[0.2em] text-muted">
+                {item}
+                <span class="h-1 w-1 rounded-full bg-blood" />
+              </span>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+  </div>
 
-    <div class="mt-8 grid gap-x-6 gap-y-12 md:grid-cols-2">
+  <section aria-labelledby="exploring" class="shell mt-16">
+    <SectionHeading
+      id="exploring"
+      eyebrow="What I'm exploring"
+      title="Systems that survive contact with reality"
+      note="My work sits where a model meets a messy input: a photograph instead of a scanner, a laptop CPU instead of a cluster, a detector that notices its own drift. The common thread is deep learning, with MLOps as the delivery layer."
+    />
+
+    <div class="mt-8 grid gap-4 md:grid-cols-3">
+      {
+        FOCUS_AREAS.map((interest) => (
+          <article class="card card-hover group p-5 md:p-6" data-reveal>
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-[0.68rem] tracking-[0.16em] text-ember">{interest.index}</span>
+              <span class="h-px w-8 bg-line transition group-hover:bg-ember" aria-hidden="true" />
+            </div>
+            <h3 class="mt-5 text-base font-semibold tracking-[-0.01em]">{interest.title}</h3>
+            <p class="mt-2.5 text-sm leading-relaxed text-muted">{interest.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section aria-labelledby="projects" class="shell mt-16">
+    <SectionHeading
+      id="projects"
+      eyebrow="Featured work"
+      title="Projects"
+      note="Each one states the problem, what I personally built, the measured result, and what I would do differently."
+    />
+
+    <div class="mt-8 grid gap-5 md:grid-cols-2">
       {featured.map((project) => <ProjectCard project={project} />)}
     </div>
 
-    <div class="mt-12 border-t border-line pt-5">
+    <div class="mt-8 border-t border-line/80 pt-5">
       <a
-        class="group inline-flex items-baseline gap-3 text-base font-medium transition hover:text-paper"
+        class="group inline-flex items-center gap-3 text-sm font-semibold transition hover:text-paper"
         href="/projects"
       >
-        Show all {allProjects.length} projects
-        <span class="text-muted transition group-hover:translate-x-1 group-hover:text-blood" aria-hidden="true">→</span>
+        Show all projects
+        <span class="text-muted transition group-hover:translate-x-1 group-hover:text-ember" aria-hidden="true">→</span>
       </a>
     </div>
   </section>
 
-  <section aria-labelledby="experience" class="shell mt-24">
-    <SectionHeading title="Experience" id="experience" actionHref="/about" actionLabel="About" />
+  <section aria-labelledby="experience" class="shell mt-16">
+    <SectionHeading
+      id="experience"
+      eyebrow="Background"
+      title="Experience"
+      actionHref="/about"
+      actionLabel="Full background"
+    />
 
-    <ol class="mt-8 grid gap-x-12 md:grid-cols-2">
+    <ol class="mt-4">
       {
         EXPERIENCE.map((entry) => (
-          <li class="border-t border-line py-5">
-            <p class="label">{entry.period}</p>
-            <h3 class="mt-2 text-base font-semibold leading-snug">{entry.title}</h3>
-            <p class="mt-1 text-sm text-ember">{entry.org}</p>
-            <p class="mt-2 max-w-prose text-sm leading-relaxed text-muted">{entry.detail}</p>
+          <li class="group grid gap-2 border-t border-line/80 py-6 sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-8">
+            <span class="label pt-1">{entry.period}</span>
+            <div class="relative pl-5">
+              <span
+                class="absolute left-0 top-2 h-1.5 w-1.5 rounded-full bg-line transition group-hover:bg-ember"
+                aria-hidden="true"
+              />
+              <h3 class="text-base font-semibold leading-snug tracking-[-0.01em]">{entry.title}</h3>
+              <p class="mt-1 text-sm text-ember">{entry.org}</p>
+              <p class="mt-2 max-w-prose text-sm leading-relaxed text-muted">{entry.detail}</p>
+            </div>
           </li>
         ))
       }
@@ -100,6 +193,49 @@ const dossier = [
   </section>
 
   <ToolkitStrip />
+
+  <section aria-labelledby="beyond" class="shell mt-16">
+    <SectionHeading
+      id="beyond"
+      eyebrow="Community & initiative"
+      title="Beyond the lab"
+      actionHref="/about"
+      actionLabel="Leadership & education"
+    />
+
+    <div class="mt-8 grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+      <div class="card p-6 md:p-8" data-reveal>
+        <p class="serif text-[clamp(1.35rem,2.4vw,1.8rem)] leading-[1.25] text-paper">
+          I like teams that care about the parts nobody puts in a demo: labels, pipelines, and the number
+          everyone would rather not report.
+        </p>
+        <p class="mt-5 max-w-prose text-sm leading-relaxed text-muted">
+          Alongside coursework I have run recruitment and budgets for student communities, and taught
+          English to groups returning to study. Both pushed the same skill: explaining technical work
+          clearly to people who are not in the room yet.
+        </p>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <span class="chip">Ownership</span>
+          <span class="chip">Clear writing</span>
+          <span class="chip">Hands-on delivery</span>
+        </div>
+      </div>
+
+      <ol class="flex flex-col justify-center">
+        {
+          LEADERSHIP.map((entry) => (
+            <li class="border-t border-line/80 py-4 first:border-t-0 first:pt-0">
+              <p class="label">{entry.period}</p>
+              <h3 class="mt-1.5 text-sm font-semibold">{entry.title}</h3>
+              <p class="mt-0.5 text-xs text-muted">
+                {entry.org} · {entry.detail}
+              </p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
 
   <ContactBlock />
 </BaseLayout>

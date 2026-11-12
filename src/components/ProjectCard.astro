@@ -1,6 +1,5 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { publicationSummary } from '../lib/repos';
 
 interface Props {
   project: CollectionEntry<'projects'>;
@@ -9,40 +8,52 @@ interface Props {
 
 const { project, headingLevel = 3 } = Astro.props;
 const { data } = project;
-const shownStack = data.stack.slice(0, 4);
+const cardTitle = data.shortTitle ?? data.title;
+const shownStack = data.stack.slice(0, 3);
 const hiddenStackCount = data.stack.length - shownStack.length;
+const cardIndex = String(data.order).padStart(2, '0');
 ---
 
 <a
   href={`/projects/${project.id}`}
-  class="group flex h-full flex-col focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-blood"
+  class="project-card card card-hover group flex h-full flex-col overflow-hidden focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ember"
+  data-reveal
 >
-  <div class="aspect-[16/9] overflow-hidden bg-panel">
+  <div class="relative aspect-[16/9] overflow-hidden">
     <img
       src={data.cover.src}
       alt={data.cover.alt}
       loading="lazy"
       decoding="async"
-      class="h-full w-full object-cover transition duration-500 ease-out group-hover:scale-[1.02]"
+      class="h-full w-full object-cover transition duration-700 ease-out group-hover:scale-[1.045]"
     />
-  </div>
-
-  <div class="flex items-start justify-between gap-4 pt-4">
-    {headingLevel === 2 ? <h2 class="h-sub">{data.title}</h2> : <h3 class="h-sub">{data.title}</h3>}
+    <div class="media-shade"></div>
     <span
-      class="mt-1 text-lg leading-none text-muted transition duration-200 group-hover:-translate-y-0.5 group-hover:text-blood"
-      aria-hidden="true">↗</span
+      class="absolute left-3.5 top-3.5 rounded-full border border-white/10 bg-void/65 px-2.5 py-1 font-mono text-[0.62rem] tracking-[0.14em] text-paper/80 backdrop-blur-sm"
     >
+      {cardIndex}
+    </span>
+    <span
+      class="absolute bottom-3.5 right-3.5 inline-flex translate-y-1 items-center gap-1.5 rounded-full bg-paper/95 px-3 py-1.5 text-[0.68rem] font-semibold text-void opacity-0 transition duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100"
+    >
+      View project <span aria-hidden="true">↗</span>
+    </span>
   </div>
 
-  <p class="mt-2 text-sm leading-relaxed text-muted">{data.summary}</p>
+  <div class="flex flex-1 flex-col p-5 md:p-6">
+    <div class="flex items-start justify-between gap-4">
+      {headingLevel === 2 ? <h2 class="h-sub">{cardTitle}</h2> : <h3 class="h-sub">{cardTitle}</h3>}
+      <span
+        class="mt-0.5 text-base leading-none text-muted transition duration-200 group-hover:-translate-y-0.5 group-hover:text-ember"
+        aria-hidden="true">↗</span
+      >
+    </div>
 
-  <div class="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 pt-5 text-xs text-muted">
-    <span>{publicationSummary(data.repos)}</span>
-    <span aria-hidden="true" class="text-line">/</span>
-    <span>
-      {shownStack.join(' · ')}
-      {hiddenStackCount > 0 && ` +${hiddenStackCount}`}
-    </span>
+    <p class="mt-2.5 text-sm leading-relaxed text-muted">{data.summary}</p>
+
+    <div class="mt-auto flex flex-wrap gap-1.5 pt-5">
+      {shownStack.map((tool) => <span class="tag">{tool}</span>)}
+      {hiddenStackCount > 0 && <span class="tag">+{hiddenStackCount}</span>}
+    </div>
   </div>
 </a>

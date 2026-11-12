@@ -3,7 +3,7 @@ export const SITE = {
   role: 'AI & Data Science engineering student',
   school: 'ESI-SBA',
   description:
-    'AI & Data Science engineering student at ESI-SBA. End-to-end machine learning: computer vision, NLP, and the pipelines that keep models working after deployment.',
+    'AI & Data Science engineering student at ESI-SBA. End-to-end machine learning across computer vision, NLP, and deep learning, with the pipelines that keep models working after deployment.',
   email: 'ms.medjahri@esi-sba.dz',
   linkedin: 'https://www.linkedin.com/in/mohammed-safouane-medjahri-0bb181296/',
   linkedinHandle: 'mohammed-safouane-medjahri-0bb181296',
@@ -18,6 +18,7 @@ export const NAV = [
   { href: '/', label: 'Home' },
   { href: '/projects', label: 'Projects' },
   { href: '/about', label: 'About' },
+  { href: '/#contact', label: 'Contact' },
 ] as const;
 
 export const LANGUAGES = ['English', 'French', 'Arabic'] as const;

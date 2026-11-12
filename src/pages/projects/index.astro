@@ -1,29 +1,37 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
+import { getProjects } from '../../lib/projects';
 
-const projects = (await getCollection('projects', ({ data }) => !data.draft)).sort(
-  (a, b) => a.data.order - b.data.order
-);
+const projects = await getProjects();
 ---
 
 <BaseLayout
   title="Projects"
-  description="Six end-to-end machine-learning Projects: document vision, speech and emotion, malicious-URL detection, anomaly detection with an MLOps loop, neural style transfer, and face recognition."
+  description="End-to-end machine-learning Projects: document vision, speech and NLP, deep learning, malicious-URL detection, anomaly detection with an MLOps loop, neural style transfer, and face recognition."
 >
-  <section class="shell pt-14 md:pt-20">
-    <h1 class="h-display">Projects</h1>
-    <p class="mt-6 max-w-2xl text-base leading-relaxed text-muted md:text-lg">
-      {projects.length} Projects, in the order I would walk you through them. Each one states the problem,
-      what I personally built, the measured result, and what I would do differently.
-    </p>
-    <p class="mt-4 max-w-2xl border-l-2 border-blood/60 pl-4 text-sm leading-relaxed text-muted">
-      Some repositories are not public yet. Those pages show a <span class="text-paper">publishing soon</span>{' '}
-      note instead of a link, so a missing Repository is never mistaken for a broken one.
+  <section class="shell pt-12 md:pt-16">
+    <p class="eyebrow">Archive</p>
+
+    <div class="mt-5 border-b border-line/80 pb-6">
+      <h1 class="h-display">Projects</h1>
+    </div>
+
+    <p class="mt-5 max-w-2xl text-sm leading-relaxed text-muted md:text-base">
+      The order below is the order I would walk you through them. Each one states the problem, what I
+      personally built, the measured result, and what I would do differently.
     </p>
 
-    <div class="mt-10 grid gap-x-6 gap-y-12 md:grid-cols-2">
+    <ul class="mt-6 flex flex-wrap gap-2">
+      <li class="chip">Computer vision</li>
+      <li class="chip">NLP</li>
+      <li class="chip">Deep learning</li>
+      <li class="chip">Cybersecurity</li>
+      <li class="chip">MLOps</li>
+      <li class="chip">Research</li>
+    </ul>
+
+    <div class="mt-9 grid gap-5 md:grid-cols-2">
       {projects.map((project) => <ProjectCard project={project} headingLevel={2} />)}
     </div>
   </section>

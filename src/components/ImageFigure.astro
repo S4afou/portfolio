@@ -12,13 +12,21 @@ const { image, variant = 'plain', eager = false, class: className = '' } = Astro
 ---
 
 <figure class={className}>
-  <div class:list={['bg-panel', variant === 'cover' && 'aspect-[16/9] overflow-hidden']}>
+  <div
+    class:list={[
+      'overflow-hidden rounded-2xl border border-line/80 bg-panel',
+      variant === 'cover' && 'aspect-[16/9]',
+    ]}
+  >
     <img
       src={image.src}
       alt={image.alt}
       loading={eager ? 'eager' : 'lazy'}
       decoding="async"
-      class:list={[variant === 'cover' ? 'h-full w-full object-cover' : 'w-full']}
+      class:list={[
+        variant === 'cover' ? 'h-full w-full object-cover' : 'w-full',
+        'transition duration-700 hover:scale-[1.01]',
+      ]}
     />
   </div>
   {image.caption && <figcaption class="mt-3 text-xs leading-relaxed text-muted">{image.caption}</figcaption>}

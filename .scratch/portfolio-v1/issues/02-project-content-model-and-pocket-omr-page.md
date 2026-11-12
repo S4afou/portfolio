@@ -2,7 +2,7 @@
 
 **What to build:** The first complete Project page, plus the validated content model every later Project reuses. A single Markdown file produces a shareable page for Pocket OMR containing the summary, ownership, timeframe, stack, problem, approach, metrics, reflection, cover image, gallery and Repository entries. A Project whose code is not public shows a publishing badge instead of a dead link. Malformed content fails the build with a message that names the missing field.
 
-**Blocked by:** 01 — Foundation and visual system
+**Blocked by:** 01, Foundation and visual system
 
 **Status:** done
 
