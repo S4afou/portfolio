@@ -125,7 +125,7 @@ Project content lives in Markdown files with validated frontmatter, so adding or
 - Sitemap and favicon generated at build.
 - WCAG AA contrast for text and UI states; visible focus rings; semantic landmarks; alt text required for every image in the schema.
 - No analytics, no cookies, no contact form backend, no third-party embeds.
-- The phone number is never published; the contract test enforces its absence.
+- The website never prints the phone number; the contract test enforces its absence from every page. The linked CV PDF is a static asset outside that check. The current CV includes a phone number, and the owner will replace it with a version that omits it.
 
 ### Build guardrails
 

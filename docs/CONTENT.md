@@ -216,6 +216,10 @@ If you change the filename, update `cv` in `src/lib/site.ts`. The same file hold
 email, LinkedIn, GitHub, location, availability, and the language list used in the header, footer,
 contact block, and hero chips.
 
+The website itself never prints the phone number, and the contract test enforces that. The CV PDF is
+a separate static file, so its contents are your choice; the current copy still includes a phone
+number and is due to be replaced.
+
 ## Edit the focus areas
 
 The three interest cards on Home and the hero focus label live in `src/lib/focus.ts`:
