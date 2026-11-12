@@ -173,9 +173,8 @@ describe('content-to-page contract', () => {
       });
 
     const files = [
-      ...['src', 'docs', 'tests'].flatMap((dir) => collect(path.join(root, dir))),
+      ...['src', 'tests'].flatMap((dir) => collect(path.join(root, dir))),
       path.join(root, 'README.md'),
-      path.join(root, 'GLOSSARY.md'),
     ];
 
     for (const file of files) {

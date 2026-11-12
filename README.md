@@ -4,8 +4,7 @@ A static portfolio for an AI & Data Science engineering student: six Projects, f
 with AdaIN style transfer and Eigenfaces/Fisherfaces as full pages. Every Project page carries the full
 Project name, the research and prior art behind the method, the approaches that were compared, the
 owner's personal contribution, and a reflection. The positioning focuses on computer vision, NLP, and
-deep learning. Built with Astro and Tailwind, content lives in Markdown, and every published number is
-traceable to `docs/project-facts.md`.
+deep learning. Built with Astro and Tailwind, with content in Markdown.
 
 ## Requirements
 
@@ -53,31 +52,45 @@ src/
 public/
   projects/<slug>/         Project images, one folder per Project
   cv/                      the downloadable CV
+  portrait.webp            Home hero portrait, cropped to 4:5
   cursor.svg               canopy cursor (original 8-panel umbrella)
   cursor-active.svg        canopy cursor on links and buttons
   og.png                   social preview image
-docs/
-  spec.md                  scope and decisions
-  project-facts.md         claims ledger and image sources, the only permitted source of numbers
-  CONTENT.md               how to edit content without touching layout
-  adr/                     architecture decision records
 tests/                     schema seam and built-output contract
 scripts/prepare-og.mjs      social preview generator
-scripts/prepare-assets-v1.mjs legacy v1 image pipeline (sharp); do not use for covers
 ```
 
 ## Editing content
 
-See **[docs/CONTENT.md](docs/CONTENT.md)** for adding a Project, publishing a Repository, replacing
-the CV, editing Education/Experience/Leadership, adding a certification, editing the focus areas,
-changing contact subjects, and editing skills and languages. No layout file needs to change for any of
-those.
+#### Add a Project
 
-A Project now has two names: the full `title` used as the page `<h1>`, and the `shortTitle` used on
-cards, the breadcrumb, and previous/next navigation. The optional `research`, `comparison`, and
-`contribution` fields drive the three depth sections; the current six Projects all provide them, and
-the contract test checks that they stay present. Covers are external thematic photographs or real
-gameplay/report frames; record the source and licence in `docs/project-facts.md`.
+1. Create `src/content/projects/<slug>.md`. The filename becomes `/projects/<slug>`.
+2. Put the cover and gallery images in `public/projects/<slug>/`.
+3. Fill the frontmatter. Keep the body empty; all copy lives in frontmatter.
+
+The schema in `src/content.config.ts` validates the file at build time. Required fields are `title`,
+`summary`, `ownership`, `timeframe`, `stack` (2+), `problem`, `approach` (2+), `results` (2+
+name/value/context metrics), `reflection`, `cover` (`src` + `alt`), and `order`. Optional fields are
+`shortTitle`, `research` (1+), `comparison` (2+), `contribution` (1+), `gallery`, `repos`, `featured`
+(default `false`), and `draft` (default `false`). Prose supports Markdown but not raw HTML.
+
+`title` is the full name used as the page `<h1>` and metadata title. `shortTitle` is used on cards,
+the breadcrumb, and previous/next navigation. When `shortTitle` is absent, `title` is used everywhere.
+
+#### Publish a Repository
+
+A Repository entry has a `label`, a `status`, and an optional `url`. Use `pending` or `private` while
+the code is not public; both render nothing, so the page never shows a dead link. `published` requires
+a real URL. Never add a placeholder `#` link.
+
+#### Edit the rest
+
+- `src/lib/site.ts`: name, role, email, LinkedIn, GitHub, location, availability, CV path, languages.
+- `src/lib/background.ts`: Education, Experience, Leadership, Certifications.
+- `src/lib/skills.ts`: the skill groups shown as Skills & languages.
+- `src/lib/focus.ts`: the three focus areas and the hero focus label.
+- `src/lib/contact.ts`: the prefilled email subjects.
+- `public/cv/`: replace the PDF and keep the filename to update every CV button at once.
 
 ## Design notes
 
@@ -85,7 +98,7 @@ gameplay/report frames; record the source and licence in `docs/project-facts.md`
 - Typography: Archivo for display and UI, Newsreader italic for short accents, Geist Mono for
   numeric data and small index labels. All self-hosted through Fontsource.
 - Layout is compact and sectioned: soft-bordered panels, a 76rem measure, generous but controlled
-  spacing, and a section order inspired by the peer portfolio. Cards stay 16:9.
+  spacing. Cards stay 16:9.
 - Ambient motion: radial glows, a masked grid, a stack ticker, a portrait index plate, a
   reading-progress bar, and reveal-on-scroll. All motion is suppressed under reduced motion and
   content remains visible without JavaScript.
@@ -97,7 +110,5 @@ gameplay/report frames; record the source and licence in `docs/project-facts.md`
   Contact block also shows the address and a **Copy email** button, so a browser with no mail handler
   still has a way to reach the owner.
 - Covers are thematic external photographs or real gameplay/report frames; evidence charts remain
-  charts. The source and licence for each cover are recorded in `docs/project-facts.md`.
+  charts.
 - Two test seams only: content schema validation, and the content-to-page contract on built HTML.
-- The project-depth, full-name, cover-sourcing, and contact-fallback decisions are recorded in
-  `docs/adr/0006-project-depth-and-cover-sourcing.md`.
