@@ -148,8 +148,11 @@ describe('content-to-page contract', () => {
   });
 
   it('never publishes the phone number', () => {
+    // Match the shape of an Algerian phone number without storing the number itself.
+    const phone = /\+213|(?:^|[^\d])0[5-7](?:[\s.-]?\d){8}(?![\d])/;
+
     for (const page of pages) {
-      expect(page.html).not.toMatch(/\+213|699\s?078\s?698/);
+      expect(page.html, page.route).not.toMatch(phone);
     }
   });
 
