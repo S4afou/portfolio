@@ -1,6 +1,10 @@
 ---
 import { NAV, SITE } from '../lib/site';
 import Mark from './Mark.astro';
+
+/** A hash href points at a section of the current page, so it gets a location state, not a page one. */
+const sectionId = (href: string) =>
+  href.includes('#') ? href.slice(href.indexOf('#') + 1) : undefined;
 ---
 
 <header class="sticky top-0 z-50 border-b border-line/70 bg-void/95 shadow-[0_10px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl">
@@ -17,8 +21,10 @@ import Mark from './Mark.astro';
         NAV.map((item) => (
           <a
             href={item.href}
+            data-nav-section={sectionId(item.href)}
             aria-current={
-              Astro.url.pathname === item.href || Astro.url.pathname.startsWith(`${item.href}/`)
+              !sectionId(item.href) &&
+              (Astro.url.pathname === item.href || Astro.url.pathname.startsWith(`${item.href}/`))
                 ? 'page'
                 : undefined
             }

@@ -4,5 +4,8 @@ dist/
 .playwright-mcp/
 *.log
 .DS_Store
-.env
-.env.*
+.env*
+.vercel
+cv/*.aux
+cv/*.out
+cv/*.pdf

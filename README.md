@@ -28,7 +28,16 @@ Run `npm test` before committing. It fails if a Project is malformed, an image i
 unpublished Repository renders as a link or appears on the page, or an excluded Project leaks into the
 output.
 
-## Site URL
+## Deployment
+
+`main` deploys to production on Vercel through the repository integration; every branch and pull
+request gets a preview URL. The project is named `safouane-medjahri`, so the production site is
+`https://safouane-medjahri.vercel.app` and the CV is served from
+`/cv/medjahri-mohammed-safouane-cv.pdf`.
+
+`vercel.json` sets the build command to `npm run check && npm test`, so a malformed Project, a
+Repository that would render as a dead link, a broken content guard or a failing type check fails the
+deploy instead of publishing.
 
 Canonical URLs, Open Graph tags, the sitemap, and `robots.txt` derive from one value:
 
@@ -36,8 +45,8 @@ Canonical URLs, Open Graph tags, the sitemap, and `robots.txt` derive from one v
 SITE_URL=https://your-domain.example npm run build
 ```
 
-If `SITE_URL` is unset, the build falls back to `https://safouane-medjahri.vercel.app`. Hosting and
-domain setup are intentionally out of scope; `dist/` is plain static output and can be served anywhere.
+If `SITE_URL` is unset, the build falls back to the Vercel URL above. `dist/` stays plain static
+output and can be served anywhere.
 
 ## Structure
 
@@ -52,11 +61,13 @@ src/
   styles/global.css        type system, palette, cursor, component primitives
 public/
   projects/<slug>/         Project images, one folder per Project
-  cv/                      the downloadable CV
+  cv/                      the downloadable CV, generated from cv/ at the repository root
   portrait.webp            Home hero portrait, cropped to 4:5
   cursor.svg               canopy cursor (original 8-panel umbrella)
   cursor-active.svg        canopy cursor on links and buttons
   og.png                   social preview image
+cv/                        the CV source (LaTeX) behind public/cv/*.pdf
+vercel.json                the production build command, which runs the checks first
 tests/                     schema seam and built-output contract
 scripts/prepare-og.mjs      social preview generator
 ```
@@ -106,6 +117,9 @@ link, so never add one that does not resolve.
 - `src/lib/focus.ts`: the three focus areas and the hero focus label.
 - `src/lib/contact.ts`: the prefilled email subjects.
 - `public/cv/`: replace the PDF and keep the filename to update every CV button at once.
+- `cv/medjahri-mohammed-safouane.tex`: the CV source. From `cv/`, run
+  `pdflatex -interaction=nonstopmode medjahri-mohammed-safouane.tex`, then copy the generated PDF
+  over `public/cv/medjahri-mohammed-safouane-cv.pdf`.
 
 ## Design notes
 

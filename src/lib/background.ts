@@ -15,7 +15,7 @@ export type CertificationEntry = {
 
 export const EDUCATION: Entry[] = [
   {
-    period: '2024 to Present',
+    period: '2024 to 2027 (expected)',
     title: 'Higher Cycle (Engineering)',
     org: 'ESI-SBA · Artificial Intelligence & Data Science',
     detail: 'Engineering cycle in artificial intelligence and data science.',

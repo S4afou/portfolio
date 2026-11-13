@@ -1,6 +1,6 @@
 export const SITE = {
   name: 'Medjahri Mohammed Safouane',
-  role: 'AI & Data Science engineering student',
+  role: 'Final-year AI & Data Science engineering student',
   school: 'ESI-SBA',
   description:
     'AI & Data Science engineering student at ESI-SBA. End-to-end machine learning across computer vision, NLP, and deep learning, with the pipelines that keep models working after deployment.',

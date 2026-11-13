@@ -101,6 +101,42 @@ const person = {
         targets.forEach((target) => observer.observe(target));
       }
 
+      const sectionLinks = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-nav-section]'));
+
+      if (sectionLinks.length && 'IntersectionObserver' in window) {
+        const pageLink = document.querySelector<HTMLAnchorElement>('.nav-link[aria-current="page"]');
+        const sections = new Map<Element, HTMLAnchorElement>();
+
+        for (const link of sectionLinks) {
+          const id = link.dataset.navSection;
+          const section = id ? document.getElementById(id) : null;
+
+          if (section) sections.set(section, link);
+        }
+
+        // ARIA allows one current item per set, so the section state replaces the page state while
+        // the section is in view and the page state comes back once it leaves.
+        const spy = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              const link = sections.get(entry.target);
+              if (!link) continue;
+
+              if (entry.isIntersecting) {
+                pageLink?.removeAttribute('aria-current');
+                link.setAttribute('aria-current', 'location');
+              } else {
+                link.removeAttribute('aria-current');
+                if (pageLink) pageLink.setAttribute('aria-current', 'page');
+              }
+            }
+          },
+          { rootMargin: '-45% 0px -45% 0px' }
+        );
+
+        for (const section of sections.keys()) spy.observe(section);
+      }
+
       const progressBar = document.querySelector<HTMLElement>('#scroll-progress-bar');
 
       if (progressBar) {

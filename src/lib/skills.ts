@@ -19,6 +19,6 @@ export const SKILL_GROUPS: SkillGroup[] = [
   },
   {
     label: 'Software Engineering',
-    items: ['Python', 'C / C++', 'Java', 'APIs', 'Docker', 'Git'],
+    items: ['Python', 'C / C++', 'Java', 'Web development', 'APIs', 'Docker', 'Git'],
   },
 ];

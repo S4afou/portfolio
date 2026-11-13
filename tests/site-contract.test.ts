@@ -252,9 +252,19 @@ describe('content-to-page contract', () => {
     ).toBe(true);
 
     for (const page of pages) {
+      const primaryNav = /<nav aria-label="Primary"[\s\S]*?<\/nav>/.exec(page.html)?.[0] ?? '';
+      const contact = anchors(primaryNav).find((anchor) => anchor.href === '/#contact');
+
+      expect(contact, `Contact link missing on /${page.route}`).toBeDefined();
+      expect(contact?.text).toBe('Contact');
+      expect(contact?.tag).toContain('data-nav-section="contact"');
+      expect(contact?.tag).not.toContain('aria-current');
+
       expect(
-        anchors(page.html).some((anchor) => anchor.href === '/#contact' && anchor.text === 'Contact')
-      ).toBe(true);
+        anchors(primaryNav)
+          .map((anchor) => anchor.text)
+          .slice(0, 4)
+      ).toEqual(['Home', 'Projects', 'About', 'Contact']);
     }
   });
 
