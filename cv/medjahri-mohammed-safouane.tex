@@ -33,7 +33,7 @@
   {}
   [\vspace{-0.75em}\rule{\textwidth}{0.4pt}]
 
-\titlespacing{\section}{0pt}{0.5em}{0.25em}
+\titlespacing{\section}{0pt}{0.4em}{0.25em}
 
 \setstretch{0.94}
 \setlength{\parskip}{0.2em}
@@ -60,7 +60,7 @@
 
 % --- SUMMARY ---
 \section{Summary}
-Final-year AI \& Data Science engineering student at ESI-SBA, looking for a PFE or research internship. I build applied machine-learning systems end to end, mostly in computer vision, NLP and deep learning, and I care about how they are evaluated and kept working after deployment.
+Final-year AI \& Data Science engineering student at ESI-SBA, looking for a PFE or research internship. I build applied machine-learning systems end to end, mostly in computer vision, NLP and deep learning.
 
 % --- EDUCATION ---
 \section{Education}
@@ -90,29 +90,35 @@ Final-year AI \& Data Science engineering student at ESI-SBA, looking for a PFE 
 % --- PROJECTS ---
 \section{Projects}
 
-\textbf{Pocket OMR: exam grading from a phone photo} \hfill \textit{PyTorch, YOLOv8m-seg, OpenCV, FastAPI, Flutter}
+\textbf{Pocket OMR} \hfill \href{https://github.com/pocket-omr}{[GitHub]}\\
+Grades a multiple-choice exam from a phone photo: sheet detection, bubble reading and handwritten fields.
 \begin{itemize}
-    \item \textbf{Led} box detection, \textbf{built} the OpenCV rectification and segmentation stages, and \textbf{trained} the \mbox{MobileNetV3-Small} \mbox{classifier}, on a team of six: 99.5 mAP@50 and 98.98\% bubble accuracy. \href{https://github.com/pocket-omr}{[code]}
+    \item \textbf{Led} box detection, \textbf{built} the rectification and segmentation stages, and \textbf{trained} the bubble classifier, on a team of six.
 \end{itemize}
-\textbf{Spell Caster: voice and emotion driven spellcasting} \hfill \textit{Whisper-Small, LoRA, Conformer, ONNX, FastAPI} \href{https://github.com/S4afou/spell-caster}{[code]}
+\textbf{Spell Caster} \hfill \href{https://github.com/S4afou/spell-caster}{[GitHub]}\\
+A voice-controlled spellcasting game that reads both the spell and the emotion behind it.
 \begin{itemize}
-    \item \textbf{Built} the dual ASR and emotion pipeline and the FastAPI server, on a two-person team: 0.754 emotion F1, 19.3 ms CPU per utterance. The Unity game was my teammate's.
+    \item \textbf{Built} the speech and emotion pipeline and its local server, on a two-person team; the Unity game was my teammate's.
 \end{itemize}
-\textbf{H-GATE: malicious URL detection} \hfill \textit{PyTorch, FT-Transformer, XGBoost, LightGBM, CatBoost} \href{https://github.com/S4afou/h-gate}{[code]}
+\textbf{H-GATE} \hfill \href{https://github.com/S4afou/h-gate}{[GitHub]}\\
+Sorts malicious URLs into five attack classes with a stacking ensemble.
 \begin{itemize}
-    \item \textbf{Built} the stacking ensemble tuned with Harris Hawks: 0.9856 macro-F1 at 0.37\% macro-FPR, against a 0.9839 \mbox{XGBoost} baseline.
+    \item \textbf{Built} the four base models, the out-of-fold stacking pipeline, the Harris Hawks search and the five-fold evaluation.
 \end{itemize}
-\textbf{AdaIN style transfer} \hfill \textit{PyTorch, VGG-19} \href{https://github.com/S4afou/adain-style-transfer}{[code]}
+\textbf{AdaIN style transfer} \hfill \href{https://github.com/S4afou/adain-style-transfer}{[GitHub]}\\
+Applies the style of any painting to a photo in one pass, with adaptive instance normalization.
 \begin{itemize}
-    \item \textbf{Implemented} AdaIN from scratch and \textbf{owned} the multi-GPU training and the inference benchmark, on a team of four: 150 ms per 512 px image on one T4.
+    \item \textbf{Implemented} the model from scratch and \textbf{owned} the multi-GPU training and benchmark, on a team of four.
 \end{itemize}
-\textbf{Eigenfaces and Fisherfaces: face recognition} \hfill \textit{Python, scikit-learn, PCA, LDA, SVM} \href{https://github.com/S4afou/eigenfaces-fisherfaces}{[code]}
+\textbf{Eigenfaces and Fisherfaces} \hfill \href{https://github.com/S4afou/eigenfaces-fisherfaces}{[GitHub]}\\
+Face recognition on Olivetti Faces: tells 40 people apart with classical linear methods.
 \begin{itemize}
-    \item \textbf{Owned} the PCA sweep, the 1-NN and SVM comparison, noise tests and 5-fold CV, on a team of four: 98.0\% at 54x fewer dimensions, 97.25\% cross-validated. Fisherfaces, a teammate's implementation, reached 99.0\%.
+    \item \textbf{Owned} the PCA sweep, the classifier comparison and five-fold CV, on a team of four; Fisherfaces was a teammate's.
 \end{itemize}
-\textbf{Shuttle anomaly detection with an MLOps loop} \hfill \textit{scikit-learn, W\&B, Streamlit, Docker} \href{https://github.com/S4afou/shuttle-nasa-ML}{[code]}
+\textbf{Shuttle anomaly detection} \hfill \href{https://github.com/S4afou/shuttle-nasa-ML}{[GitHub]}\\
+Flags abnormal spacecraft telemetry and retrains itself when the model drifts.
 \begin{itemize}
-    \item \textbf{Built} LOF, Isolation Forest and One-Class SVM pipelines: 0.979 F1 on the best sweep, with a drift-triggered retrain at 0.80 production F1.
+    \item \textbf{Built} the detectors, the experiment tracking and model registry, the drift-triggered retraining and the dashboard.
 \end{itemize}
 
 % --- CERTIFICATIONS ---
@@ -131,6 +137,7 @@ Kaggle, nine verified certificates. \\
     \item \textbf{Data \& cybersecurity:} data analysis, feature engineering, intrusion detection.
     \item \textbf{Systems \& HPC:} Linux, parallel computing, networking.
     \item \textbf{Software engineering:} Python, C/C++, Java, web development, APIs, Docker, Git.
+    \item \textbf{Tools:} PyTorch, scikit-learn, OpenCV, NumPy, pandas, matplotlib, Jupyter, FastAPI, W\&B, Streamlit, Hugging Face.
 \end{itemize}
 
 % --- LANGUAGES ---
