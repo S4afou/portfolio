@@ -71,10 +71,22 @@ export const LEADERSHIP: Entry[] = [
  */
 export const CERTIFICATIONS: CertificationEntry[] = [
   {
+    title: 'Intro to Programming',
+    issuer: 'Kaggle',
+    detail: 'Arithmetic, variables, functions, data types, conditions and lists, from first principles.',
+    url: 'https://www.kaggle.com/learn/certification/s4afou/intro-to-programming',
+  },
+  {
     title: 'Python',
     issuer: 'Kaggle',
     detail: 'Functions, booleans, lists, loops, strings, dictionaries and external libraries.',
     url: 'https://www.kaggle.com/learn/certification/s4afou/python',
+  },
+  {
+    title: 'Pandas',
+    issuer: 'Kaggle',
+    detail: 'Series and DataFrames, indexing, selecting, grouping, sorting and handling data types.',
+    url: 'https://www.kaggle.com/learn/certification/s4afou/pandas',
   },
   {
     title: 'Intro to Machine Learning',
