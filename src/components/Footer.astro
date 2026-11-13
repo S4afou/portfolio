@@ -26,30 +26,30 @@ const year = new Date().getFullYear();
       <p class="label mb-1">Index</p>
       {
         NAV.map((item) => (
-          <a class="w-fit text-sm text-muted transition hover:text-paper" href={item.href}>
+          <a class="footer-link w-fit text-sm text-muted transition hover:text-paper" href={item.href}>
             {item.label}
           </a>
         ))
       }
-      <a class="w-fit text-sm text-muted transition hover:text-paper" href={SITE.cv} download>Download CV</a>
+      <a class="footer-link w-fit text-sm text-muted transition hover:text-paper" href={SITE.cv} download>Download CV</a>
     </nav>
 
     <div class="flex flex-col gap-2">
       <p class="label mb-1">Contact</p>
       <a
-        class="w-fit break-all text-sm text-muted transition hover:text-paper"
+        class="footer-link w-fit break-all text-sm text-muted transition hover:text-paper"
         href={mailto(CONTACT_SUBJECTS.general)}
       >
         {SITE.email}
       </a>
       <a
-        class="w-fit text-sm text-muted transition hover:text-paper"
+        class="footer-link w-fit text-sm text-muted transition hover:text-paper"
         href={SITE.linkedin}
         target="_blank"
         rel="noopener noreferrer">LinkedIn</a
       >
       <a
-        class="w-fit text-sm text-muted transition hover:text-paper"
+        class="footer-link w-fit text-sm text-muted transition hover:text-paper"
         href={SITE.github}
         target="_blank"
         rel="noopener noreferrer">GitHub</a

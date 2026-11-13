@@ -196,7 +196,7 @@ img {
 }
 
 .h-project {
-  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-size: clamp(1.75rem, 4vw, 3.2rem);
   line-height: 0.98;
   letter-spacing: -0.04em;
   font-weight: 500;
@@ -414,6 +414,8 @@ img {
 
 .nav-link {
   position: relative;
+  display: inline-flex;
+  align-items: center;
   border-radius: 999px;
   padding: 0.42rem 0.72rem;
   font-size: 0.78rem;
@@ -439,8 +441,34 @@ img {
 
 @media (max-width: 400px) {
   .nav-link {
-    padding: 0.4rem 0.3rem;
+    padding: 0.4rem 0.25rem;
+    font-size: 0.72rem;
+  }
+}
+
+/* Touch targets: 44px tall up to the desktop breakpoint, without changing the
+   desktop pill height. */
+@media (max-width: 1023px) {
+  .nav-link,
+  .btn,
+  .btn-text {
+    min-height: 2.75rem;
+  }
+
+  .footer-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .label {
     font-size: 0.7rem;
+  }
+
+  .eyebrow {
+    font-size: 0.72rem;
   }
 }
 
