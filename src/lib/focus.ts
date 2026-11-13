@@ -9,7 +9,7 @@ export const FOCUS_AREAS: FocusArea[] = [
   {
     index: '01',
     title: 'Computer vision',
-    body: 'Document understanding that starts with a phone photograph: rectification, segmentation, and reading the page the way a scanner would.',
+    body: 'Document understanding, from rectification and segmentation to reading structured fields out of a photographed page.',
   },
   {
     index: '02',
