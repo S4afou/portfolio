@@ -3,7 +3,8 @@
 A static portfolio for an AI & Data Science engineering student: six Projects, four featured on Home,
 with AdaIN style transfer and Eigenfaces/Fisherfaces as full pages. Every Project page carries the full
 Project name, the research and prior art behind the method, the approaches that were compared, the
-owner's personal contribution, and a reflection. The positioning focuses on computer vision, NLP, and
+owner's personal contribution, and a reflection. The About page carries education, experience,
+leadership, and verified Kaggle certificates. The positioning focuses on computer vision, NLP, and
 deep learning. Built with Astro and Tailwind, with content in Markdown.
 
 ## Requirements
@@ -47,7 +48,7 @@ src/
   lib/                     schema, repository rules, site and background data, skills, focus, contact
   components/              cards, metric grid, contact block, footer/header
   layouts/BaseLayout.astro metadata, navigation, footer
-  pages/                   Home, /projects, /projects/[slug], /about, 404
+  pages/                   Home, /projects, /projects/[slug], /about with the certificates section, 404
   styles/global.css        type system, palette, cursor, component primitives
 public/
   projects/<slug>/         Project images, one folder per Project
@@ -82,6 +83,20 @@ the breadcrumb, and previous/next navigation. When `shortTitle` is absent, `titl
 A Repository entry has a `label`, a `status`, and an optional `url`. Use `pending` or `private` while
 the code is not public; both render nothing, so the page never shows a dead link. `published` requires
 a real URL. Never add a placeholder `#` link.
+
+#### Add a certificate
+
+Certificates appear only on the About page. They never go in the GitHub profile README.
+
+1. Open the public verification URL first,
+   `https://www.kaggle.com/learn/certification/<username>/<course-slug>`, and confirm it resolves
+   and names the owner. A 500 means the certificate was not issued.
+2. Add one object to `CERTIFICATIONS` in `src/lib/background.ts`: `title`, `issuer`, a one-line
+   `detail`, and `url`. Leave `period` unset so the entry renders without a date column.
+3. Run `npm test` and `npm run check`, then commit.
+
+The section hides itself while `CERTIFICATIONS` is empty. A title with a `url` becomes an external
+link, so never add one that does not resolve.
 
 #### Edit the rest
 
