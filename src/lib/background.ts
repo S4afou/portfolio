@@ -6,10 +6,11 @@ export type Entry = {
 };
 
 export type CertificationEntry = {
-  period: string;
+  period?: string;
   title: string;
   issuer: string;
   detail?: string;
+  url?: string;
 };
 
 export const EDUCATION: Entry[] = [
@@ -65,7 +66,14 @@ export const LEADERSHIP: Entry[] = [
 ];
 
 /**
- * Kept empty until a certification or award is actually issued.
+ * Only add a certificate after its public verification page resolves.
  * The About page hides the whole section while this list is empty.
  */
-export const CERTIFICATIONS: CertificationEntry[] = [];
+export const CERTIFICATIONS: CertificationEntry[] = [
+  {
+    title: 'Intro to Machine Learning',
+    issuer: 'Kaggle',
+    detail: 'Data exploration, model validation, overfitting, random forests and competitions.',
+    url: 'https://www.kaggle.com/learn/certification/s4afou/intro-to-machine-learning',
+  },
+];
