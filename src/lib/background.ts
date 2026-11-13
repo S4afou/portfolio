@@ -71,6 +71,12 @@ export const LEADERSHIP: Entry[] = [
  */
 export const CERTIFICATIONS: CertificationEntry[] = [
   {
+    title: 'Python',
+    issuer: 'Kaggle',
+    detail: 'Functions, booleans, lists, loops, strings, dictionaries and external libraries.',
+    url: 'https://www.kaggle.com/learn/certification/s4afou/python',
+  },
+  {
     title: 'Intro to Machine Learning',
     issuer: 'Kaggle',
     detail: 'Data exploration, model validation, overfitting, random forests and competitions.',
