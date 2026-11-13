@@ -89,9 +89,39 @@ export const CERTIFICATIONS: CertificationEntry[] = [
     url: 'https://www.kaggle.com/learn/certification/s4afou/pandas',
   },
   {
+    title: 'Data Cleaning',
+    issuer: 'Kaggle',
+    detail: 'Missing values, scaling and normalization, parsing dates and untangling inconsistent entries.',
+    url: 'https://www.kaggle.com/learn/certification/s4afou/data-cleaning',
+  },
+  {
     title: 'Intro to Machine Learning',
     issuer: 'Kaggle',
     detail: 'Data exploration, model validation, overfitting, random forests and competitions.',
     url: 'https://www.kaggle.com/learn/certification/s4afou/intro-to-machine-learning',
+  },
+  {
+    title: 'Intermediate Machine Learning',
+    issuer: 'Kaggle',
+    detail: 'Pipelines, cross-validation, gradient boosting, categorical encoding and data leakage.',
+    url: 'https://www.kaggle.com/learn/certification/s4afou/intermediate-machine-learning',
+  },
+  {
+    title: 'Data Visualization',
+    issuer: 'Kaggle',
+    detail: 'Line charts, bar charts, heatmaps, scatter plots and distributions with seaborn.',
+    url: 'https://www.kaggle.com/learn/certification/s4afou/data-visualization',
+  },
+  {
+    title: 'Feature Engineering',
+    issuer: 'Kaggle',
+    detail: 'Mutual information, clustering, principal component analysis and target encoding.',
+    url: 'https://www.kaggle.com/learn/certification/s4afou/feature-engineering',
+  },
+  {
+    title: 'Intro to Deep Learning',
+    issuer: 'Kaggle',
+    detail: 'Dense layers, activation functions, stochastic gradient descent, dropout and batch normalization.',
+    url: 'https://www.kaggle.com/learn/certification/s4afou/intro-to-deep-learning',
   },
 ];
