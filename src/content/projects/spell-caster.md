@@ -6,7 +6,7 @@ ownership: >-
   Two-person project. I built the ASR and emotion pipeline and the local
   FastAPI server; the Unity game was my teammate's work, and we integrated the
   pipeline together.
-timeframe: '2025'
+timeframe: 'Apr to May 2026'
 stack:
   - Python
   - PyTorch
@@ -158,7 +158,8 @@ gallery:
 
 repos:
   - label: GitHub repository
-    status: pending
+    url: https://github.com/S4afou/spell-caster
+    status: published
 
 featured: true
 order: 2

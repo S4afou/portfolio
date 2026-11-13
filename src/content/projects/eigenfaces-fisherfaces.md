@@ -170,7 +170,8 @@ gallery:
 
 repos:
   - label: GitHub repository
-    status: pending
+    url: https://github.com/S4afou/eigenfaces-fisherfaces
+    status: published
 
 featured: false
 order: 6

@@ -155,7 +155,8 @@ gallery:
 
 repos:
   - label: GitHub repository
-    status: pending
+    url: https://github.com/S4afou/adain-style-transfer
+    status: published
 
 featured: false
 order: 5

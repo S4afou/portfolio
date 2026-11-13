@@ -6,7 +6,7 @@ ownership: >-
   Solo project. I built the four base learners, the out-of-fold stacking
   pipeline, the Harris Hawks hyperparameter search, and the five-fold
   evaluation.
-timeframe: '2025'
+timeframe: 'Apr to May 2026'
 stack:
   - Python
   - PyTorch
@@ -177,7 +177,8 @@ gallery:
 
 repos:
   - label: GitHub repository
-    status: pending
+    url: https://github.com/S4afou/h-gate
+    status: published
 
 featured: true
 order: 3

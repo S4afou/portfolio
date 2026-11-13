@@ -6,7 +6,7 @@ ownership: >-
   Team of six. All six shared collection, cleaning, and annotation. I led the
   box-detection approaches, built the OpenCV rectification and segmentation
   stages, and trained the MobileNetV3-Small bubble classifier.
-timeframe: '2025'
+timeframe: 'Mar to Jun 2026'
 stack:
   - Python
   - PyTorch
@@ -188,8 +188,9 @@ gallery:
     caption: Per-field detection metrics. The weak fields are the reason the review interface exists.
 
 repos:
-  - label: GitHub repository
-    status: pending
+  - label: GitHub organization
+    url: https://github.com/pocket-omr
+    status: published
 
 featured: true
 order: 1
