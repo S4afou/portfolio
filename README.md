@@ -1,11 +1,11 @@
 # Portfolio: Medjahri Mohammed Safouane
 
-A static portfolio for an AI & Data Science engineering student: six Projects, four featured on Home,
-with AdaIN style transfer and Eigenfaces/Fisherfaces as full pages. Every Project page carries the full
-Project name, the research and prior art behind the method, the approaches that were compared, the
-owner's personal contribution, and a reflection. The About page carries education, experience,
-leadership, and verified Kaggle certificates. The positioning focuses on computer vision, NLP, and
-deep learning. Built with Astro and Tailwind, with content in Markdown.
+This is my portfolio, a static site for my work as an AI & Data Science engineering student. It has
+six Projects, four of them featured on Home, with AdaIN style transfer and Eigenfaces/Fisherfaces as
+full pages. Every Project page carries the full Project name, the research and prior art behind the
+method, the approaches I compared, my own contribution, and a reflection. The About page carries my
+education, experience, leadership, and verified Kaggle certificates. The positioning focuses on
+computer vision, NLP, and deep learning. I built it with Astro and Tailwind, with content in Markdown.
 
 ## Requirements
 
@@ -24,15 +24,15 @@ deep learning. Built with Astro and Tailwind, with content in Markdown.
 | `npm test` | Build the site, then run the full test suite (schema + built-output contract) |
 | `npm run assets:og` | Regenerate the social preview image (`public/og.png`) |
 
-Run `npm test` before committing. It fails if a Project is malformed, an image is missing, an
-unpublished Repository renders as a link or appears on the page, or an excluded Project leaks into the
-output.
+I run `npm test` before committing. It fails if a Project is malformed, an image is missing, an
+unpublished Repository renders as a link or appears on the page, or an excluded Project leaks into
+the output.
 
 ## Deployment
 
-`main` deploys to production on Vercel through the repository integration; every branch and pull
-request gets a preview URL. The project is named `safouane-medjahri`, so the production site is
-`https://safouane-medjahri.vercel.app` and the CV is served from
+Every push to `main` deploys to production on Vercel through the repository integration; every branch
+and pull request gets a preview URL. I named the project `safouane-medjahri`, so the production site
+is `https://safouane-medjahri.vercel.app` and the CV is served from
 `/cv/medjahri-mohammed-safouane-cv.pdf`.
 
 `vercel.json` sets the build command to `npm run check && npm test`, so a malformed Project, a
@@ -78,7 +78,7 @@ scripts/prepare-og.mjs      social preview generator
 
 1. Create `src/content/projects/<slug>.md`. The filename becomes `/projects/<slug>`.
 2. Put the cover and gallery images in `public/projects/<slug>/`.
-3. Fill the frontmatter. Keep the body empty; all copy lives in frontmatter.
+3. Fill the frontmatter. I keep the body empty; all copy lives in frontmatter.
 
 The schema in `src/content.config.ts` validates the file at build time. Required fields are `title`,
 `summary`, `ownership`, `timeframe`, `stack` (2+), `problem`, `approach` (2+), `results` (2+
@@ -91,27 +91,27 @@ the breadcrumb, and previous/next navigation. When `shortTitle` is absent, `titl
 
 #### Publish a Repository
 
-A Repository entry has a `label`, a `status`, and an optional `url`. Use `pending` or `private` while
-the code is not public; both render nothing, so the page never shows a dead link. `published` requires
-a real URL. Never add a placeholder `#` link.
+A Repository entry has a `label`, a `status`, and an optional `url`. I use `pending` or `private`
+while the code is not public; both render nothing, so the page never shows a dead link. `published`
+requires a real URL. I never add a placeholder `#` link.
 
 #### Add a certificate
 
-Certificates appear only on the About page. They never go in the GitHub profile README.
+Certificates appear only on the About page. They never go in my GitHub profile README.
 
 1. Open the public verification URL first,
    `https://www.kaggle.com/learn/certification/<username>/<course-slug>`, and confirm it resolves
-   and names the owner. A 500 means the certificate was not issued.
+   and names me. A 500 means the certificate was not issued.
 2. Add one object to `CERTIFICATIONS` in `src/lib/background.ts`: `title`, `issuer`, a one-line
    `detail`, and `url`. Leave `period` unset so the entry renders without a date column.
 3. Run `npm test` and `npm run check`, then commit.
 
 The section hides itself while `CERTIFICATIONS` is empty. A title with a `url` becomes an external
-link, so never add one that does not resolve.
+link, so I never add one that does not resolve.
 
 #### Edit the rest
 
-- `src/lib/site.ts`: name, role, email, LinkedIn, GitHub, location, availability, CV path, languages.
+- `src/lib/site.ts`: my name, role, email, LinkedIn, GitHub, location, availability, CV path, languages.
 - `src/lib/background.ts`: Education, Experience, Leadership, Certifications.
 - `src/lib/skills.ts`: the skill groups shown as Skills & languages.
 - `src/lib/focus.ts`: the three focus areas and the hero focus label.
@@ -123,21 +123,22 @@ link, so never add one that does not resolve.
 
 ## Design notes
 
-- Dark only. Black base, near-white text, one red accent. No analytics, cookies, or third-party embeds.
+- Dark only. Black base, near-white text, one red accent. No analytics, cookies, or third-party
+  embeds.
 - Typography: Archivo for display and UI, Newsreader italic for short accents, Geist Mono for
-  numeric data and small index labels. All self-hosted through Fontsource.
-- Layout is compact and sectioned: soft-bordered panels, a 76rem measure, generous but controlled
+  numeric data and small index labels. I self-host all of it through Fontsource.
+- The layout is compact and sectioned: soft-bordered panels, a 76rem measure, generous but controlled
   spacing. Cards stay 16:9.
 - Ambient motion: radial glows, a masked grid, a stack ticker, a portrait index plate, a
-  reading-progress bar, and reveal-on-scroll. All motion is suppressed under reduced motion and
-  content remains visible without JavaScript.
-- The umbrella mark is an original inline SVG, not Capcom's logo.
-- The custom cursor is an original 8-panel red/white canopy, not a trace of the Umbrella Corporation
-  logo. It is applied only for fine pointers with motion allowed; it is disabled for touch and under
-  reduced motion.
+  reading-progress bar, and reveal-on-scroll. I suppress all of it under reduced motion, and the
+  content stays visible without JavaScript.
+- The umbrella mark is my own inline SVG, not Capcom's logo.
+- The custom cursor is my own 8-panel red/white canopy, not a trace of the Umbrella Corporation logo.
+  I apply it only for fine pointers with motion allowed, and disable it for touch and under reduced
+  motion.
 - Contact actions share one vocabulary and prefill a subject; Contact is in the header and footer. The
   Contact block also shows the address and a **Copy email** button, so a browser with no mail handler
-  still has a way to reach the owner.
-- Covers are thematic external photographs or real gameplay/report frames; evidence charts remain
+  still has a way to reach me.
+- Covers are thematic external photographs or real gameplay and report frames; evidence charts remain
   charts.
 - Two test seams only: content schema validation, and the content-to-page contract on built HTML.
